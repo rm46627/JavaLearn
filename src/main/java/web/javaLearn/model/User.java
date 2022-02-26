@@ -1,4 +1,4 @@
-package Model;
+package web.javaLearn.model;
 
 import com.sun.istack.NotNull;
 import lombok.AllArgsConstructor;

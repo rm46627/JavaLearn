@@ -1,12 +1,16 @@
-package Model;
+package web.javaLearn.model;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 
+@Data
+@AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "verification")
+@Table(name = "key")
 public class Key {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
