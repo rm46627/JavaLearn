@@ -2,8 +2,8 @@ package web.javaLearn.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
-import web.javaLearn.model.Key;
+import web.javaLearn.model.Token;
 
 @Repository
-public interface KeyRepository extends JpaRepository<Key, Long> {
+public interface TokenRepository extends JpaRepository<Token, Long> {
 }

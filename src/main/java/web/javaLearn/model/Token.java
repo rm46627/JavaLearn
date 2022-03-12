@@ -10,12 +10,11 @@ import javax.persistence.*;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "key")
-public class Key {
+public class Token {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String key;
+    private String token;
     @OneToOne(fetch = FetchType.LAZY)
     private User user;
 }

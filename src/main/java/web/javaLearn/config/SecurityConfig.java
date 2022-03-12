@@ -13,12 +13,13 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     public void configure(HttpSecurity httpSecurity) throws Exception {
-        httpSecurity.csrf().disable() // session and cookies are not used
-                .authorizeRequests() // these endpoints are used for authentication and registration we don’t expect the user to be authenticated at that point of time
-                .antMatchers("/auth/**")
-                .permitAll()
-                .anyRequest()
-                .authenticated();
+        httpSecurity.cors().and()
+                .csrf().disable() // session and cookies are not used
+                .authorizeHttpRequests(authorize -> authorize // these endpoints are used for authentication and registration we don’t expect the user to be authenticated at that point of time
+                    .antMatchers("/api/auth/**")
+                    .permitAll()
+                    .anyRequest()
+                    .authenticated());
     }
 
     @Bean
