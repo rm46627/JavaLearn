@@ -1,2 +1,3 @@
 # JavaLearn
-Learn java with my web app!
+Educational webapp made using Java Spring, Hibernate, Angular, Bootstrap.
+REST API documentation generated using Swagger and Springfox.
