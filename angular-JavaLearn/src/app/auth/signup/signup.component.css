@@ -1,0 +1,16 @@
+.form-group, .btn-primary{
+    margin-top: 10px;
+}
+
+h4 {
+    margin-top: 20px;
+    text-align: center;
+}
+
+input.ng-invalid.ng-touched {
+    border: 1px solid red;
+} 
+
+.valid {
+    border: 1px solid red;
+} 

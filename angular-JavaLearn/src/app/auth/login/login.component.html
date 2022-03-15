@@ -1,0 +1,22 @@
+<div class="container">
+    <h4>Login</h4>
+    <form [formGroup]="loginForm">
+        <div class="form-group">
+            <label for="inputUsername">Username</label>
+            <input type="text" class="form-control" [formControlName]="'username'" id="inputUsername" aria-describedby="username">
+            <small *ngIf="!loginForm.get('username')?.valid && loginForm.get('username')?.touched">
+              Required.<br>
+            </small>
+          </div>
+        <div class="form-group">
+          <label for="inputPassword">Password</label>
+          <input type="password" class="form-control" [formControlName]="'password'" id="inputPassword">
+          <small *ngIf="!loginForm.get('password')?.valid && loginForm.get('password')?.touched">
+            Required.<br>
+          </small>
+        </div>
+        <div class="text-center">
+            <button type="submit" class="btn btn-primary ">Submit</button>
+        </div>
+    </form>
+</div>
