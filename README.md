@@ -1,3 +1,3 @@
 # JavaLearn
 Educational webapp made using Java Spring, Hibernate, Angular, Bootstrap.  
-REST API documentation generated using Swagger and Springfox.
+REST API documentation generated using Swingdoc.
