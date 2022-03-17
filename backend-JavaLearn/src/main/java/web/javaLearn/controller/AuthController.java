@@ -5,7 +5,9 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import web.javaLearn.dto.RegisterRequest;
+import web.javaLearn.model.AuthenticationResponse;
+import web.javaLearn.model.LoginRequest;
+import web.javaLearn.model.RegisterRequest;
 import web.javaLearn.service.AuthService;
 
 @RestController
@@ -27,5 +29,10 @@ public class AuthController {
     public ResponseEntity<String> verifyAccount(@PathVariable String token){
         authService.verifyAccount(token);
         return new ResponseEntity<>("Account activated Succesfully", HttpStatus.OK);
+    }
+
+    @PostMapping("/login")
+    public AuthenticationResponse login(@RequestBody LoginRequest loginRequest) {
+        return authService.login(loginRequest);
     }
 }

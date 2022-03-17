@@ -2,12 +2,13 @@ package web.javaLearn.service;
 
 import lombok.AllArgsConstructor;
 import lombok.SneakyThrows;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-import web.javaLearn.model.Email;
-import web.javaLearn.model.Token;
-import web.javaLearn.model.User;
-import web.javaLearn.dto.RegisterRequest;
+import web.javaLearn.model.*;
 import web.javaLearn.repository.TokenRepository;
 import web.javaLearn.repository.UserRepository;
 
@@ -23,6 +24,12 @@ public class AuthService {
     private final UserRepository userRepository;
     private final TokenRepository tokenRepository;
     private final MailService mailService;
+    private final AuthenticationManager authenticationManager;
+    private final JwtProvider jwtProvider;
+
+    //
+    // REGISTRATION
+    //
 
     @Transactional
     public void signup(RegisterRequest registerRequest){
@@ -40,6 +47,10 @@ public class AuthService {
                 "Your activation link:" +
                 "http://localhost:8080/api/auth/accountVerification/" + key));
     }
+
+    //
+    // VERIFICATION AFTER REGISTRATION
+    //
 
     private String generateVerificationToken(User user) {
         String key = UUID.randomUUID().toString();
@@ -63,5 +74,24 @@ public class AuthService {
         User user = userRepository.findByUsername(username).orElseThrow(() -> new Exception("User not found with name: " + username));
         user.setEnabled(true);
         userRepository.save(user);
+    }
+
+
+    //
+    // LOGIN
+    //
+
+    @SneakyThrows
+    public AuthenticationResponse login(LoginRequest loginRequest) {
+        // AM komunikuje się z userDetailsService
+        Authentication authenticate = authenticationManager.authenticate(
+                new UsernamePasswordAuthenticationToken(
+                        loginRequest.getUsername(),
+                        loginRequest.getPassword()));
+
+        SecurityContextHolder.getContext().setAuthentication(authenticate);
+        String token = jwtProvider.generateToken(authenticate);
+
+        return new AuthenticationResponse(token, loginRequest.getUsername());
     }
 }
