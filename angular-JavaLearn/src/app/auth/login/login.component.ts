@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from '../shared/auth.service';
 import { LoginRequest } from './login-request';
+import { Notify } from 'notiflix/build/notiflix-notify-aio';
 
 @Component({
   selector: 'app-login',
@@ -9,9 +10,8 @@ import { LoginRequest } from './login-request';
 })
 export class LoginComponent implements OnInit {
 
-  loginForm: FormGroup;
-
-  loginRequest: LoginRequest;
+  loginForm: FormGroup
+  loginRequest: LoginRequest
 
   constructor(private authService: AuthService) {
     this.loginForm = new FormGroup ({
@@ -28,12 +28,19 @@ export class LoginComponent implements OnInit {
   ngOnInit(): void {}
 
   login(){
-    this.loginRequest.username = this.loginForm.get('username')?.value;
-    this.loginRequest.password = this.loginForm.get('password')?.value;
+    this.loginRequest.username = this.loginForm.get('username')?.value
+    this.loginRequest.password = this.loginForm.get('password')?.value
 
-    this.authService.login(this.loginRequest).subscribe(data => {
-      console.log('Login successful');
+    this.authService.login(this.loginRequest).subscribe({
+      error: (e) => {
+        console.error(e)
+        Notify.warning('Something went wrong')},
+      complete: () => {
+        console.info('complete')
+        Notify.success('You are successfully logged in.')} 
     })
   }
+
+  ngDestroy(): void {}
 
 }

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from '../shared/auth.service';
 import { SignupRequest } from './signup-request';
+import { Notify } from 'notiflix/build/notiflix-notify-aio';
 
 @Component({
   selector: 'app-signup',
@@ -10,8 +11,8 @@ import { SignupRequest } from './signup-request';
 export class SignupComponent implements OnInit {
 
   signupForm: FormGroup;
-
   signupRequest: SignupRequest;
+  successfulAlert: boolean;
 
   constructor(private authService : AuthService) {
     this.signupForm = new FormGroup ({
@@ -26,6 +27,7 @@ export class SignupComponent implements OnInit {
       password: ''
     };
 
+    this.successfulAlert = false;
   }
 
   ngOnInit(): void {}
@@ -35,10 +37,14 @@ export class SignupComponent implements OnInit {
     this.signupRequest.email = this.signupForm.get('email')?.value;
     this.signupRequest.password = this.signupForm.get('password')?.value;
 
-    this.authService.signup(this.signupRequest)
-      .subscribe(data => {
-        console.log(data);
-      })
+    this.authService.signup(this.signupRequest).subscribe({
+      error: (e) => {
+        console.error(e);
+        Notify.warning('Something went wrong')},
+      complete: () => {
+        console.info('complete'); 
+        Notify.success('Registration successful. Check your email for account activation link')} 
+    })
   }
 
 }
