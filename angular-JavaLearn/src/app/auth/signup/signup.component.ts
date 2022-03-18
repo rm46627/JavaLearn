@@ -12,13 +12,12 @@ export class SignupComponent implements OnInit {
 
   signupForm: FormGroup;
   signupRequest: SignupRequest;
-  successfulAlert: boolean;
 
   constructor(private authService : AuthService) {
     this.signupForm = new FormGroup ({
-      username: new FormControl('', [Validators.required, Validators.minLength(3)]),
-      email: new FormControl('', [Validators.required, Validators.email]),
-      password: new FormControl('', [Validators.required, Validators.minLength(6)])
+      username: new FormControl(null, [Validators.required, Validators.minLength(3)]),
+      email: new FormControl(null, [Validators.required, Validators.email]),
+      password: new FormControl(null, [Validators.required, Validators.minLength(6)])
     });
 
     this.signupRequest = {
@@ -26,8 +25,6 @@ export class SignupComponent implements OnInit {
       email: '',
       password: ''
     };
-
-    this.successfulAlert = false;
   }
 
   ngOnInit(): void {}
