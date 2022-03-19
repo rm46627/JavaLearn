@@ -9,12 +9,16 @@ import { LoginComponent } from './auth/login/login.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { NgxWebstorageModule } from 'ngx-webstorage';
+import { HomeComponent } from './home/home.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { BsDropdownModule,BsDropdownConfig } from 'ngx-bootstrap/dropdown';
 @NgModule({
   declarations: [
     AppComponent,
     HeaderComponent,
     SignupComponent,
-    LoginComponent
+    LoginComponent,
+    HomeComponent
   ],
   imports: [
     BrowserModule,
@@ -22,9 +26,11 @@ import { NgxWebstorageModule } from 'ngx-webstorage';
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
-    NgxWebstorageModule.forRoot()
+    NgxWebstorageModule.forRoot(),
+    BrowserAnimationsModule,
+    BsDropdownModule.forRoot()
   ],
-  providers: [],
+  providers: [BsDropdownConfig],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

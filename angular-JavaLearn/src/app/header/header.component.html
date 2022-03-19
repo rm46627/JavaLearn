@@ -1,18 +1,20 @@
-
-  <nav class="navbar sticky-top navbar-expand navbar-light bg-light">
-    <div class="container-fluid">
-      <button class="btn btn-dark navbtn" type="button" href="/" >JavaLearn</button>
-      <div class="collapse navbar-collapse" id="navbarNav">
-        <ul class="navbar-nav">
-          <li class="nav-item">
-            <a class="nav-link active navbtn float" href="/login">Login</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link active navbtn float" routerLink="/signup">Register</a>
-          </li>
-        </ul>
+<nav class="navbar navbar-expand-sm navbar-light bg-light">
+  <div class="container-fluid">
+    <button class="btn btn-dark navbtn" type="button" href="/" >JavaLearn</button>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+      <div class="navbar-nav" *ngIf="!isLoggedIn">
+        <a class="nav-link active navbtn" routerLink="/signup">Register</a>
+        <a class="nav-link active navbtn" href="/login">Login</a>
+      </div>
+      <div class="navbar-nav" *ngIf="isLoggedIn">
+        <a class="nav-link active navbtn" routerLink="/">{{username}}</a>
+        <a class="nav-link active navbtn" (click)="logout()">Logout</a>
       </div>
     </div>
-  </nav>
+  </div>
+</nav>
 
 <router-outlet></router-outlet>
