@@ -2,6 +2,8 @@ package web.javaLearn.service;
 
 import lombok.AllArgsConstructor;
 import lombok.SneakyThrows;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -32,35 +34,36 @@ public class AuthService {
     //
 
     @Transactional
-    public void signup(RegisterRequest registerRequest){
+    public User signup(RegisterRequest registerRequest){
         User user = new User();
         user.setUsername(registerRequest.getUsername());
         user.setEmail(registerRequest.getEmail());
         user.setPassword(passwordEncoder.encode(registerRequest.getPassword()));
         user.setEnabled(false);
-
         userRepository.save(user);
 
         String key = generateVerificationToken(user);
-        mailService.sendMail(new Email("Java Learn Activation Email",
-                user.getEmail(),
-                "Your activation link:" +
-                "http://localhost:8080/api/auth/accountVerification/" + key));
-    }
 
-    //
-    // VERIFICATION AFTER REGISTRATION
-    //
+        mailService.sendMail(new ActivationEmail(
+            "Java Learn Activation Email",
+            user.getEmail(),
+            "Your activation link:" + "http://localhost:8080/api/auth/accountVerification/" + key));
+
+        return user;
+    }
 
     private String generateVerificationToken(User user) {
         String key = UUID.randomUUID().toString();
         Token verificationToken = new Token();
         verificationToken.setToken(key);
         verificationToken.setUser(user);
-
         tokenRepository.save(verificationToken);
         return key;
     }
+
+    //
+    // VERIFICATION AFTER REGISTRATION
+    //
 
     @SneakyThrows
     public void verifyAccount(String token) {

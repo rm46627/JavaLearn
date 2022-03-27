@@ -31,7 +31,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     public void configure(HttpSecurity httpSecurity) throws Exception {
         httpSecurity.cors().and()
                 .csrf().disable() // session and cookies are not used
-                .authorizeHttpRequests(authorize -> authorize // these endpoints are used for authentication and registration we don’t expect the user to be authenticated at that point of time
+                .authorizeHttpRequests(authorize -> authorize // these endpoints are used for authentication and registration, we don’t expect the user to be authenticated at that point of time
                     .antMatchers("/api/auth/**",
                         "/v3/api-docs/**",
                         "/swagger-ui/**",
