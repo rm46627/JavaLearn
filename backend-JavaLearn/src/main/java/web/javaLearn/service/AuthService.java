@@ -2,8 +2,6 @@ package web.javaLearn.service;
 
 import lombok.AllArgsConstructor;
 import lombok.SneakyThrows;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -52,7 +50,7 @@ public class AuthService {
         return user;
     }
 
-    private String generateVerificationToken(User user) {
+    String generateVerificationToken(User user) {
         String key = UUID.randomUUID().toString();
         Token verificationToken = new Token();
         verificationToken.setToken(key);
@@ -64,19 +62,16 @@ public class AuthService {
     //
     // VERIFICATION AFTER REGISTRATION
     //
-
-    @SneakyThrows
-    public void verifyAccount(String token) {
+    public User verifyAccount(String token) throws Exception {
         Optional<Token> verificationToken = tokenRepository.findByToken(token);
-        fetchUserAndEnable(verificationToken.orElseThrow(() -> new Exception("Invalid Token")));
+        return fetchUserAndEnable(verificationToken.orElseThrow(() -> new Exception("Invalid Token")));
     }
 
-    @SneakyThrows
-    private void fetchUserAndEnable(Token token) {
+    private User fetchUserAndEnable(Token token) throws Exception {
         String username = token.getUser().getUsername();
         User user = userRepository.findByUsername(username).orElseThrow(() -> new Exception("User not found with name: " + username));
         user.setEnabled(true);
-        userRepository.save(user);
+        return userRepository.save(user);
     }
 
 
@@ -84,8 +79,7 @@ public class AuthService {
     // LOGIN
     //
 
-    @SneakyThrows
-    public AuthenticationResponse login(LoginRequest loginRequest) {
+    public AuthenticationResponse login(LoginRequest loginRequest) throws Exception {
         // AM komunikuje się z userDetailsService
         Authentication authenticate = authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(
@@ -93,6 +87,7 @@ public class AuthService {
                         loginRequest.getPassword()));
 
         SecurityContextHolder.getContext().setAuthentication(authenticate);
+
         String token = jwtProvider.generateToken(authenticate);
 
         return new AuthenticationResponse(token, loginRequest.getUsername());
