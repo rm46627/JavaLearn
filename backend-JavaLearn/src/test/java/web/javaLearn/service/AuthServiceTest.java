@@ -1,34 +1,22 @@
 package web.javaLearn.service;
 
-import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.MockitoJUnitRunner;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.Authentication;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.setup.MockMvcBuilders;
-import web.javaLearn.controller.AuthController;
 import web.javaLearn.model.*;
 import web.javaLearn.repository.TokenRepository;
 import web.javaLearn.repository.UserRepository;
-
-import java.util.UUID;
-
 import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 
 @RunWith(MockitoJUnitRunner.class)
 public class AuthServiceTest {
-
-    private MockMvc mockMvc;
 
     @Mock
     PasswordEncoder passwordEncoder;
@@ -45,11 +33,6 @@ public class AuthServiceTest {
 
     @InjectMocks
     private AuthService authService;
-
-    @Before
-    public void setUp(){
-        this.mockMvc = MockMvcBuilders.standaloneSetup(authService).build();
-    }
 
     // args
     RegisterRequest request = new RegisterRequest("quokka@gmail.com", "Quokka", "tajnaQuokka");
@@ -104,21 +87,6 @@ public class AuthServiceTest {
 
         // when
         Mockito.when(jwtProvider.generateToken(Mockito.any())).thenAnswer(i -> token);
-
-        // call
-        AuthenticationResponse response = authService.login(loginRequest);
-
-        // tests
-        assertEquals(response, new AuthenticationResponse(token, loginRequest.getUsername()));
-    }
-
-    @Test
-    public void login_ThrowsException() throws Exception {
-        // args
-        LoginRequest loginRequest = new LoginRequest("Quokka", "tajnaQuokka");
-
-        // when
-
 
         // call
         AuthenticationResponse response = authService.login(loginRequest);

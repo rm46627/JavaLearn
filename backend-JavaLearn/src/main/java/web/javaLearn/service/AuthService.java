@@ -30,7 +30,6 @@ public class AuthService {
     //
     // REGISTRATION
     //
-
     @Transactional
     public User signup(RegisterRequest registerRequest){
         User user = new User();
@@ -78,7 +77,6 @@ public class AuthService {
     //
     // LOGIN
     //
-
     public AuthenticationResponse login(LoginRequest loginRequest) throws Exception {
         // AM komunikuje się z userDetailsService
         Authentication authenticate = authenticationManager.authenticate(
