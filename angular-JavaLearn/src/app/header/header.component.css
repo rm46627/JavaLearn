@@ -1,3 +1,7 @@
 .navbtn:hover{
     opacity: 0.6;
 }
+
+.column {
+    width: 90%;
+}

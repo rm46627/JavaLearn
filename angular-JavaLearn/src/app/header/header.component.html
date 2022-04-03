@@ -1,6 +1,6 @@
 <nav class="navbar navbar-expand-sm navbar-light bg-light">
-  <div class="container-fluid">
-    <button class="btn btn-dark navbtn" type="button" href="/" >JavaLearn</button>
+  <div class="container-fluid column">
+    <button class="btn btn-dark navbtn" type="button" routerLink="/home" >JavaLearn</button>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
@@ -10,7 +10,8 @@
         <a class="nav-link active navbtn" href="/login">Login</a>
       </div>
       <div class="navbar-nav" *ngIf="isLoggedIn">
-        <a class="nav-link active navbtn" routerLink="/">{{username}}</a>
+        <a class="nav-link active navbtn" routerLink="/profile/{{username}}">{{username}}</a>
+        <a class="nav-link active navbtn" routerLink="/Courses">Courses</a>
         <a class="nav-link active navbtn" (click)="logout()">Logout</a>
       </div>
     </div>

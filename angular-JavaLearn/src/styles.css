@@ -3,11 +3,11 @@
     margin-top: 10px;
 }
 
-h4 {
-    margin-top: 20px;
-    text-align: center;
-}
-
 input.ng-invalid.ng-touched {
     border: 1px solid red;
+}
+.end{
+    margin-top: 100px;
+    background-repeat: no-repeat;
+    background-image: url("/assets/img/code-small.png");
 }

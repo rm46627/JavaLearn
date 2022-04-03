@@ -1,4 +1,4 @@
-package web.javaLearn.service;
+//package web.javaLearn.service;
 
 import org.junit.Assert;
 import org.junit.Before;
@@ -21,18 +21,18 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
-@RunWith(MockitoJUnitRunner.class)
-public class JwtProviderTest {
-
-    private MockMvc mockMvc;
-
-    @InjectMocks
-    private JwtProvider jwtProvider;
-
-    @Before
-    public void setUp(){
-        this.mockMvc = MockMvcBuilders.standaloneSetup(jwtProvider).build();
-    }
+//@RunWith(MockitoJUnitRunner.class)
+//public class JwtProviderTest {
+//
+//    private MockMvc mockMvc;
+//
+//    @InjectMocks
+//    private JwtProvider jwtProvider;
+//
+//    @Before
+//    public void setUp(){
+//        this.mockMvc = MockMvcBuilders.standaloneSetup(jwtProvider).build();
+//    }
     
 //    @Test
 //    @WithMockUser(username="user",password="psswd", authorities = {"ROLE_USER"})
@@ -52,4 +52,4 @@ public class JwtProviderTest {
 //    }
 
 
-}
+//}
