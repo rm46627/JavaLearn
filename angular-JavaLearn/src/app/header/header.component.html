@@ -10,8 +10,13 @@
         <a class="nav-link active navbtn" href="/login">Login</a>
       </div>
       <div class="navbar-nav" *ngIf="isLoggedIn">
-        <a class="nav-link active navbtn" routerLink="/profile/{{username}}">{{username}}</a>
-        <a class="nav-link active navbtn" routerLink="/Courses">Courses</a>
+        <div *ngIf="!isAdmin">
+          <a class="nav-link active navbtn" routerLink="/profile">{{username}}</a>
+        </div>
+        <div *ngIf="isAdmin">
+          <a class="nav-link active navbtn" routerLink="/admin">{{username}}</a>
+        </div>
+        <a class="nav-link active navbtn" routerLink="/courses">Courses</a>
         <a class="nav-link active navbtn" (click)="logout()">Logout</a>
       </div>
     </div>

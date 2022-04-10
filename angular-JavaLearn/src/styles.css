@@ -6,8 +6,22 @@
 input.ng-invalid.ng-touched {
     border: 1px solid red;
 }
+
+h4 {
+    margin-top: 20px;
+}
+
 .end{
     margin-top: 100px;
     background-repeat: no-repeat;
     background-image: url("/assets/img/code-small.png");
 }
+
+.column {
+    width: 50%;
+    background-color: white;
+}
+
+.smallColumn {
+    width: 25%;
+  }

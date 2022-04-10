@@ -9,6 +9,7 @@ import { AuthService } from '../auth/shared/auth.service';
 export class HeaderComponent implements OnInit {
 
   isLoggedIn: boolean = false
+  isAdmin: boolean = false
   username: string
 
   constructor(private authService: AuthService) {
@@ -17,6 +18,7 @@ export class HeaderComponent implements OnInit {
 
   ngOnInit(): void {
     this.authService.loggedIn.subscribe((data: boolean) => this.isLoggedIn = data)
+    this.authService.admin.subscribe((data: boolean) => this.isAdmin = data)
     this.authService.username.subscribe((data: string) => this.username = data)
   }
 

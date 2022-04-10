@@ -1,32 +1,38 @@
-<div class="container">
-    <h4>Register</h4>
-    <form [formGroup]="signupForm" (ngSubmit)="signup()">
-      <div class="form-group">
-          <label for="inputUsername">Username</label>
-          <input type="text" class="form-control" [formControlName]="'username'" id="username">
-          <small *ngIf="!signupForm.get('username')?.valid && signupForm.get('username')?.touched">
-            Minimum three characters required.<br>
-          </small>
-          <small class="form-text text-muted">You will appear under this name.</small>
-        </div>
-        <div class="form-group">
-          <label for="inputEmail">Email address</label>
-          <input type="text" class="form-control" [formControlName]="'email'" id="email" aria-describedby="email">
-          <small *ngIf="!signupForm.get('email')?.valid && signupForm.get('email')?.touched">
-            Please provide a valid email.<br>
-          </small>
-          <small class="form-text text-muted">We will not spam you.</small>
-        </div>
-        <div class="form-group">
-          <label for="inputPassword">Password</label>
-          <input type="password" class="form-control" [formControlName]="'password'" id="password">
-          <small *ngIf="!signupForm.get('password')?.valid && signupForm.get('password')?.touched">
-            Minimum six characters required.<br>
-          </small>
-          <small class="form-text text-muted">Something super secure.</small>
-        </div>
-        <div type="submit" class="text-center" >
-            <button type="submit" class="btn btn-primary" [disabled]="signupForm.invalid">Submit</button>
-        </div>
-    </form>
+<div class="row">
+  <div class="smallColumn"></div>
+  <div class="column">
+      <h4>Register</h4>
+      <div class="row">
+          <form [formGroup]="signupForm" (ngSubmit)="signup()">
+              <div class="form-group">
+                  <label for="inputUsername">Username</label>
+                  <input type="text" class="form-control" [formControlName]="'username'" id="username">
+                  <small *ngIf="!signupForm.get('username')?.valid && signupForm.get('username')?.touched">
+                    Minimum three characters required.<br>
+                  </small>
+                  <small class="form-text text-muted">You will appear under this name.</small>
+                </div>
+                <div class="form-group">
+                  <label for="inputEmail">Email address</label>
+                  <input type="text" class="form-control" [formControlName]="'email'" id="email" aria-describedby="email">
+                  <small *ngIf="!signupForm.get('email')?.valid && signupForm.get('email')?.touched">
+                    Please provide a valid email.<br>
+                  </small>
+                  <small class="form-text text-muted">We will not spam you.</small>
+                </div>
+                <div class="form-group">
+                  <label for="inputPassword">Password</label>
+                  <input type="password" class="form-control" [formControlName]="'password'" id="password">
+                  <small *ngIf="!signupForm.get('password')?.valid && signupForm.get('password')?.touched">
+                    Minimum six characters required.<br>
+                  </small>
+                  <small class="form-text text-muted">Something super secure.</small>
+                </div>
+                <div type="submit" class="text-center" >
+                    <button type="submit" class="btn btn-primary" [disabled]="signupForm.invalid">Submit</button>
+                </div>
+            </form>
+      </div>
+  </div>
+  <div class="smallColumn"></div>
 </div>

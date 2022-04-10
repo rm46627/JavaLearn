@@ -3,21 +3,9 @@ h1, h3 {
     text-align: center;
 }
 
-.column {
-    /* float:left; */
-    width: 50%;
-    background-color: white;
-}
-
-.smallColumn {
-    /* float: left; */
-    /* text-align: left; */
-    width: 25%;
-  }
-
-  .row{
+.row{
     margin-top: 100px;
-  }
+}
   
     /* Clear floats after the columns */
     .row:after {
