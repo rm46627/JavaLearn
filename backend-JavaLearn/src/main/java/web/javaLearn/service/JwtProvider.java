@@ -25,7 +25,6 @@ public class JwtProvider {
         } catch (KeyStoreException | CertificateException | NoSuchAlgorithmException | IOException e) {
             throw new Exception("Exception occurred while loading keystore");
         }
-
     }
 
     public String generateToken(Authentication authentication) throws Exception {

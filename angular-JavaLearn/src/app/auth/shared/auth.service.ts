@@ -14,6 +14,7 @@ export class AuthService {
 
   @Output() loggedIn: EventEmitter<boolean> = new EventEmitter();
   @Output() username: EventEmitter<string> = new EventEmitter();
+  @Output() admin: EventEmitter<boolean> = new EventEmitter();
   
   constructor(private httpClient: HttpClient,
     private localStorage: LocalStorageService) { }
@@ -27,9 +28,12 @@ export class AuthService {
       loginRequestPayload).pipe(map(data => {
         this.localStorage.store('authenticationToken', data.authenticationToken)
         this.localStorage.store('username', data.username)
+        this.localStorage.store('admin', data.admin)
 
         this.loggedIn.emit(true);
         this.username.emit(data.username);
+        this.admin.emit(data.admin);
+        console.log('admin: ' + data.admin);
         return true;
       }));
   }
@@ -37,9 +41,11 @@ export class AuthService {
   logout() {
     this.localStorage.clear('authenticationToken')
     this.localStorage.clear('username')
+    this.localStorage.clear('admin')
 
     this.loggedIn.emit(false);
     this.username.emit('');
+    this.admin.emit(false);
   }
 
   getAuthenticationToken(): string {
@@ -52,6 +58,10 @@ export class AuthService {
   
   getUserName() {
     return this.localStorage.retrieve('username')
+  }
+
+  isAdmin(){
+    return this.localStorage.retrieve('admin')
   }
 
 }

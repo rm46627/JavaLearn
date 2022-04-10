@@ -28,12 +28,19 @@ public class UserDetailsServiceImpl implements UserDetailsService {
     public UserDetails loadUserByUsername(String username) {
         Optional<User> userOptional = userRepository.findByUsername(username);
         User user = userOptional.orElseThrow(() -> new UsernameNotFoundException("No user " +
-                        "Found with username : " + username));
-
-        return new org.springframework.security.core
-                .userdetails.User(user.getUsername(), user.getPassword(),
-                user.isEnabled(), true, true,
-                true, getAuthorities("USER"));
+                        "found with username : " + username));
+        if(!user.isAdmin()) {
+            return new org.springframework.security.core
+                    .userdetails.User(user.getUsername(), user.getPassword(),
+                    user.isEnabled(), true, true,
+                    true, getAuthorities("ROLE_USER"));
+        }
+        else {
+            return new org.springframework.security.core
+                    .userdetails.User(user.getUsername(), user.getPassword(),
+                    user.isEnabled(), true, true,
+                    true, getAuthorities("ROLE_ADMIN"));
+        }
     }
 
     private Collection<? extends GrantedAuthority> getAuthorities(String role) {

@@ -37,6 +37,7 @@ public class AuthService {
         user.setEmail(registerRequest.getEmail());
         user.setPassword(passwordEncoder.encode(registerRequest.getPassword()));
         user.setEnabled(false);
+        user.setAdmin(false);
         userRepository.save(user);
 
         String key = generateVerificationToken(user);
@@ -79,15 +80,20 @@ public class AuthService {
     //
     public AuthenticationResponse login(LoginRequest loginRequest) throws Exception {
         // AM komunikuje się z userDetailsService
-        Authentication authenticate = authenticationManager.authenticate(
+        Authentication authentication = authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(
                         loginRequest.getUsername(),
                         loginRequest.getPassword()));
 
-        SecurityContextHolder.getContext().setAuthentication(authenticate);
+        SecurityContextHolder.getContext().setAuthentication(authentication);
 
-        String token = jwtProvider.generateToken(authenticate);
+        String token = jwtProvider.generateToken(authentication);
 
-        return new AuthenticationResponse(token, loginRequest.getUsername());
+        boolean admin = false;
+        if(authentication.getAuthorities().stream().anyMatch(ga -> ga.getAuthority().equals("ROLE_ADMIN"))) {
+            admin = true;
+        }
+
+        return new AuthenticationResponse(token, loginRequest.getUsername(), admin);
     }
 }

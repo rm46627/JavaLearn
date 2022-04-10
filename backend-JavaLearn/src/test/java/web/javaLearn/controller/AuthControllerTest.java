@@ -76,7 +76,7 @@ public class AuthControllerTest {
     @Test
     public void loginRequest_success() throws Exception {
         LoginRequest request = new LoginRequest("Quokka", "tajnaQuokka");
-        AuthenticationResponse response = new AuthenticationResponse("someToken", request.getUsername());
+        AuthenticationResponse response = new AuthenticationResponse("someToken", request.getUsername(), false);
 
         Mockito.when(authService.login(request)).thenReturn(response);
 

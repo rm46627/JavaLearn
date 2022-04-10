@@ -29,4 +29,5 @@ public class User {
     @NotNull
     private String email;
     private boolean enabled; // is email confirmed
+    private boolean admin;
 }
