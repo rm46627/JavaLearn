@@ -13,6 +13,7 @@ import { HomeComponent } from './home/home.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { BsDropdownModule,BsDropdownConfig } from 'ngx-bootstrap/dropdown';
 import { MenuComponent } from './admin/menu/menu.component';
+import { UsersComponent } from './admin/users/users.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -20,7 +21,8 @@ import { MenuComponent } from './admin/menu/menu.component';
     SignupComponent,
     LoginComponent,
     HomeComponent,
-    MenuComponent
+    MenuComponent,
+    UsersComponent
   ],
   imports: [
     BrowserModule,

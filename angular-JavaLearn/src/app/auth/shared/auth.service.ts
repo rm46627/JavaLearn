@@ -33,7 +33,6 @@ export class AuthService {
         this.loggedIn.emit(true);
         this.username.emit(data.username);
         this.admin.emit(data.admin);
-        console.log('admin: ' + data.admin);
         return true;
       }));
   }

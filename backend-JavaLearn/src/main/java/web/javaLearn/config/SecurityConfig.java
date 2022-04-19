@@ -33,6 +33,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .csrf().disable() // session and cookies are not used
                 .authorizeHttpRequests(authorize -> authorize // these endpoints are used for authentication and registration, we don’t expect the user to be authenticated at that point of time
                     .antMatchers("/api/auth/**",
+                        "/admin/**",
                         "/v3/api-docs/**",
                         "/swagger-ui/**",
                         "/swagger-ui.html").permitAll()

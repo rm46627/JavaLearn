@@ -1,0 +1,5 @@
+<ul>
+    <li *ngFor="let user of observableUsers | async" >
+      Id: {{user.id}}, Name: {{user.username}}
+    </li>
+</ul>

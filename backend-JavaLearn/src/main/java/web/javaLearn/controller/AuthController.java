@@ -26,7 +26,7 @@ public class AuthController {
         return new ResponseEntity<>("User registration successful", HttpStatus.OK);
     }
 
-    @GetMapping("accountVerification/{token}")
+    @PostMapping("accountVerification/{token}")
     public ResponseEntity<String> verifyAccount(@PathVariable String token) throws Exception {
         authService.verifyAccount(token);
         return new ResponseEntity<>("Account activated successfully", HttpStatus.OK);

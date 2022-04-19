@@ -2,6 +2,10 @@
     opacity: 0.6;
 }
 
+.column{
+    background-color: #f8f9fa;
+}
+
 .column {
-    width: 90%;
+    width: 100%;
 }
