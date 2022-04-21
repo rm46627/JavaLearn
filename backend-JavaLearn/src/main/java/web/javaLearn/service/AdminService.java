@@ -6,6 +6,7 @@ import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import web.javaLearn.model.Role;
 import web.javaLearn.model.User;
 import web.javaLearn.repository.TokenRepository;
 import web.javaLearn.repository.UserRepository;
@@ -28,11 +29,11 @@ public class AdminService {
     }
 
     @Transactional(readOnly = true)
-    public List<User> getListOfUsers() {
+    public List<User> getAllUsers() {
         return new ArrayList<>(userRepository.findAll());
     }
 
-    public Optional<User> getUserRecord(String user) {
+    public Optional<User> getUserByUsername(String user) {
         return userRepository.findByUsername(user);
     }
 
@@ -41,6 +42,15 @@ public class AdminService {
         if(isFound){
             tokenRepository.deleteById(id);
             userRepository.deleteById(id);
+            return true;
+        }
+        return false;
+    }
+
+    public boolean changeRole(Role newRole, Long id){
+        boolean isFound = userRepository.existsById(id);
+        if(isFound){
+            userRepository.updateUserRole(id, newRole);
             return true;
         }
         return false;

@@ -24,12 +24,12 @@ public class AdminController {
 
     @GetMapping("/users")
     public ResponseEntity<List<User>> getAllUsers() {
-        return new ResponseEntity<>(adminService.getListOfUsers(), HttpStatus.OK);
+        return new ResponseEntity<>(adminService.getAllUsers(), HttpStatus.OK);
     }
 
     @GetMapping("/users/{user}")
     public ResponseEntity<Optional<User>> getUser(@PathVariable String user){
-        return status(HttpStatus.OK).body(adminService.getUserRecord(user));
+        return status(HttpStatus.OK).body(adminService.getUserByUsername(user));
     }
 
     @DeleteMapping("/removeuser/{id}")
