@@ -1,5 +1,8 @@
 <ul>
     <li *ngFor="let user of observableUsers | async" >
-      Id: {{user.id}}, Name: {{user.username}}
+      Id: {{user.id}}, Name: {{user.username}}, password: {{user.password}},
+      email: {{user.email}},
+      enabled: {{user.enabled}},
+      admin: {{user.admin}}
     </li>
 </ul>

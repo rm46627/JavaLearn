@@ -11,7 +11,8 @@ const routes: Routes = [
   {path: 'login', component: LoginComponent},
   {path: 'home', component: HomeComponent},
   {path: 'admin', component: MenuComponent},
-  {path: 'admin/users', component: UsersComponent}
+  {path: 'admin/users', component: UsersComponent},
+  {path: '**', redirectTo: 'home' }
 
 ];
 
