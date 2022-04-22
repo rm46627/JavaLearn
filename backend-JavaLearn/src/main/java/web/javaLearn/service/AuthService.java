@@ -37,7 +37,7 @@ public class AuthService {
         user.setEmail(registerRequest.getEmail());
         user.setPassword(passwordEncoder.encode(registerRequest.getPassword()));
         user.setEnabled(false);
-        user.setAdmin(false);
+        user.setRole(Role.USER);
         userRepository.save(user);
 
         String key = generateVerificationToken(user);

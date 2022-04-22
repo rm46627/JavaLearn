@@ -17,7 +17,7 @@ import javax.validation.constraints.Email;
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long userId;
+    private Long Id;
     @NotNull
     private String username;
     @NotNull
@@ -26,7 +26,6 @@ public class User {
     @NotNull
     private String email;
     private boolean enabled; // is email confirmed
-
     @Enumerated(EnumType.STRING)
     private Role role;
 }
