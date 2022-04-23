@@ -11,10 +11,10 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.http.SessionCreationPolicy;
-import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import web.javaLearn.security.jwt.JwtAuthorizationFilter;
 
 @Configuration
 @EnableWebSecurity
@@ -35,6 +35,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         return new BCryptPasswordEncoder();
     }
 
+    @Bean
+    JwtAuthorizationFilter jwtAuthorizationFilter(){ return new JwtAuthorizationFilter(); }
+
     @Override
     public void configure(AuthenticationManagerBuilder authenticationManagerBuilder) throws Exception {
         authenticationManagerBuilder.userDetailsService(customUserDetailsService)
@@ -50,6 +53,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         httpSecurity.authorizeHttpRequests(authorize -> authorize
             .antMatchers("/api/auth/**").permitAll()
             .anyRequest().authenticated());
+
+        httpSecurity.addFilterBefore(jwtAuthorizationFilter(), UsernamePasswordAuthenticationFilter.class);
     }
 }
 

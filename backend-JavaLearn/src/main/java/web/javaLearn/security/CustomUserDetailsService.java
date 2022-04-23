@@ -1,21 +1,15 @@
 package web.javaLearn.security;
 
 import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import web.javaLearn.model.Role;
 import web.javaLearn.model.User;
 import web.javaLearn.repository.UserRepository;
-import web.javaLearn.service.AuthService;
 import web.javaLearn.utils.SecurityUtils;
 
-import java.util.Collection;
 import java.util.Optional;
 import java.util.Set;
-
-import static java.util.Collections.singletonList;
 
 public class CustomUserDetailsService implements UserDetailsService {
     private UserRepository userRepository;

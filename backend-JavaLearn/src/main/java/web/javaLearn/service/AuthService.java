@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import web.javaLearn.model.*;
 import web.javaLearn.repository.TokenRepository;
 import web.javaLearn.repository.UserRepository;
+import web.javaLearn.security.jwt.JwtProvider;
 
 import javax.transaction.Transactional;
 import java.util.Optional;
