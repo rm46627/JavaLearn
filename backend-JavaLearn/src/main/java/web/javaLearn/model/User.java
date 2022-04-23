@@ -8,6 +8,7 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import javax.validation.constraints.Email;
+import java.time.LocalDateTime;
 
 @Data
 @Entity
@@ -28,4 +29,10 @@ public class User {
     private boolean enabled; // is email confirmed
     @Enumerated(EnumType.STRING)
     private Role role;
+    private LocalDateTime createTime;
+
+    @Transient
+    private String accessToken;
+    @Transient
+    private String refreshToken;
 }

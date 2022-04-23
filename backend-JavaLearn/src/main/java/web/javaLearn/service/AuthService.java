@@ -27,6 +27,7 @@ public class AuthService {
     private final MailService mailService;
     private final AuthenticationManager authenticationManager;
     private final JwtProvider jwtProvider;
+    private final JwtRefreshTokenService jwtRefreshTokenService;
 
     //
     // REGISTRATION
@@ -41,23 +42,14 @@ public class AuthService {
         user.setRole(Role.USER);
         userRepository.save(user);
 
-        String key = generateVerificationToken(user);
+        Token token = jwtRefreshTokenService.generateRefreshToken(user);
 
         mailService.sendMail(new ActivationEmail(
             "Java Learn Activation Email",
             user.getEmail(),
-            "Your activation link:" + "http://localhost:8080/api/auth/accountVerification/" + key));
+            "Your activation link:" + "http://localhost:8080/api/auth/accountVerification/" + token.getTokenId()));
 
         return user;
-    }
-
-    String generateVerificationToken(User user) {
-        String key = UUID.randomUUID().toString();
-        Token verificationToken = new Token();
-        verificationToken.setToken(key);
-        verificationToken.setUser(user);
-        tokenRepository.save(verificationToken);
-        return key;
     }
 
     //
