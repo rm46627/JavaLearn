@@ -17,7 +17,6 @@ import static org.springframework.http.ResponseEntity.status;
 @RequestMapping("/admin")
 //@Secured({"ROLE_ADMIN"})
 @AllArgsConstructor
-@Slf4j
 public class AdminController {
 
     AdminService adminService;

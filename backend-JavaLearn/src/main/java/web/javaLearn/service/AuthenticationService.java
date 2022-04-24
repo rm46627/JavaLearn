@@ -11,15 +11,17 @@ import org.springframework.stereotype.Service;
 import web.javaLearn.model.*;
 import web.javaLearn.repository.TokenRepository;
 import web.javaLearn.repository.UserRepository;
+import web.javaLearn.security.UserPrincipal;
 import web.javaLearn.security.jwt.JwtProvider;
 
 import javax.transaction.Transactional;
+import java.time.LocalDateTime;
 import java.util.Optional;
 import java.util.UUID;
 
 @Service
 @AllArgsConstructor
-public class AuthService {
+public class AuthenticationService {
 
     private final PasswordEncoder passwordEncoder;
     private final UserRepository userRepository;
@@ -40,8 +42,8 @@ public class AuthService {
         user.setPassword(passwordEncoder.encode(registerRequest.getPassword()));
         user.setEnabled(false);
         user.setRole(Role.USER);
+        user.setCreateTime(LocalDateTime.now());
         userRepository.save(user);
-
         Token token = jwtRefreshTokenService.generateRefreshToken(user);
 
         mailService.sendMail(new ActivationEmail(
@@ -55,38 +57,32 @@ public class AuthService {
     //
     // VERIFICATION AFTER REGISTRATION
     //
-    public User verifyAccount(String token) throws Exception {
-        Optional<Token> verificationToken = tokenRepository.findByToken(token);
-        return fetchUserAndEnable(verificationToken.orElseThrow(() -> new Exception("Invalid Token")));
-    }
-
-    private User fetchUserAndEnable(Token token) throws Exception {
-        String username = token.getUser().getUsername();
-        User user = userRepository.findByUsername(username).orElseThrow(() -> new Exception("User not found with name: " + username));
-        user.setEnabled(true);
-        return userRepository.save(user);
+    public boolean verifyAccount(String token) {
+        if(tokenRepository.findById(token).isPresent()){
+            User user = tokenRepository.findById(token).orElseThrow().getUser();
+            user.setEnabled(true);
+            userRepository.save(user);
+            tokenRepository.deleteById(token);
+            return true;
+        }
+        return false;
     }
 
 
     //
     // LOGIN
     //
-    public AuthenticationResponse login(LoginRequest loginRequest) throws Exception {
-        // AM komunikuje się z userDetailsService
+    public User login(LoginRequest loginRequest) {
         Authentication authentication = authenticationManager.authenticate(
-                new UsernamePasswordAuthenticationToken(
-                        loginRequest.getUsername(),
-                        loginRequest.getPassword()));
+                new UsernamePasswordAuthenticationToken(loginRequest.getUsername(), loginRequest.getPassword()));
 
-        SecurityContextHolder.getContext().setAuthentication(authentication);
+        UserPrincipal userPrincipal = (UserPrincipal) authentication.getPrincipal();
+        String token = jwtProvider.generateToken(userPrincipal);
 
-        String token = jwtProvider.generateToken(authentication);
+        User user = userPrincipal.getUser();
+        user.setAccessToken(token);
+        user.setRefreshToken(jwtRefreshTokenService.generateRefreshToken(user).getTokenId());
 
-        boolean admin = false;
-        if(authentication.getAuthorities().stream().anyMatch(ga -> ga.getAuthority().equals("ROLE_ADMIN"))) {
-            admin = true;
-        }
-
-        return new AuthenticationResponse(token, loginRequest.getUsername(), admin);
+        return user;
     }
 }

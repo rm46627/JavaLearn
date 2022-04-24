@@ -4,6 +4,7 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.stereotype.Service;
 import web.javaLearn.model.User;
 import web.javaLearn.repository.UserRepository;
 import web.javaLearn.utils.SecurityUtils;
@@ -11,6 +12,7 @@ import web.javaLearn.utils.SecurityUtils;
 import java.util.Optional;
 import java.util.Set;
 
+@Service
 public class CustomUserDetailsService implements UserDetailsService {
     private UserRepository userRepository;
     @Override
@@ -29,22 +31,5 @@ public class CustomUserDetailsService implements UserDetailsService {
                 .password(user.getPassword())
                 .authorities(authorities)
                 .build();
-
-//        if(user.getRole()==Role.ADMIN) {
-//            return new org.springframework.security.core
-//                    .userdetails.User(user.getUsername(), user.getPassword(),
-//                    user.isEnabled(), true, true,
-//                    true, getAuthorities("ROLE_USER"));
-//        }
-//        else {
-//            return new org.springframework.security.core
-//                    .userdetails.User(user.getUsername(), user.getPassword(),
-//                    user.isEnabled(), true, true,
-//                    true, getAuthorities("ROLE_ADMIN"));
-//        }
     }
-
-//    private Collection<? extends GrantedAuthority> getAuthorities(String role) {
-//        return singletonList(new SimpleGrantedAuthority(role));
-//    }
 }

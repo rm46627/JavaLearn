@@ -1,6 +1,8 @@
 package web.javaLearn.security.jwt;
 
 import io.jsonwebtoken.Jwt;
+import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -13,6 +15,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 public class JwtAuthorizationFilter extends OncePerRequestFilter {
+
     @Autowired
     private JwtProvider jwtProvider;
 

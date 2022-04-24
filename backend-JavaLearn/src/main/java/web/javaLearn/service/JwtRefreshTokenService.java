@@ -18,14 +18,17 @@ import java.util.Set;
 import java.util.UUID;
 
 @Service
-@AllArgsConstructor
 public class JwtRefreshTokenService {
+
     @Value("${app.jwt.refresh-expiration-in-ms}")
     private Long REFRESH_EXPIRATION_IN_MS;
 
-    private TokenRepository tokenRepository;
+    @Autowired
     private UserRepository userRepository;
+    @Autowired
     private JwtProvider jwtProvider;
+    @Autowired
+    private TokenRepository tokenRepository;
 
     public Token generateRefreshToken(User user){
         Token token = new Token();
@@ -34,7 +37,7 @@ public class JwtRefreshTokenService {
         token.setCreateDate(LocalDateTime.now());
         token.setExpirationDate(LocalDateTime.now().plus(REFRESH_EXPIRATION_IN_MS, ChronoUnit.MILLIS));
 
-        return token;
+        return tokenRepository.save(token);
     }
 
     public User generateAccesTokenFromRefreshToken(String refreshTokenId){

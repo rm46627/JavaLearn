@@ -38,9 +38,9 @@ public class AdminService {
     }
 
     public boolean removeUser(Long id) {
-        boolean isFound = userRepository.existsById(id);
-        if(isFound){
-            tokenRepository.deleteById(id);
+        if(userRepository.findById(id).isPresent()){
+            User user = userRepository.findById(id).orElseThrow();
+            tokenRepository.deleteByUser(user);
             userRepository.deleteById(id);
             return true;
         }
