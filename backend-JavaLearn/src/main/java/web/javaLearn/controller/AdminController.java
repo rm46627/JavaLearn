@@ -15,7 +15,6 @@ import static org.springframework.http.ResponseEntity.status;
 
 @RestController
 @RequestMapping("/admin")
-//@Secured({"ROLE_ADMIN"})
 @AllArgsConstructor
 public class AdminController {
 
@@ -27,7 +26,7 @@ public class AdminController {
     }
 
     @GetMapping("/users/{user}")
-    public ResponseEntity<Optional<User>> getUser(@PathVariable String user){
+    public ResponseEntity<User> getUser(@PathVariable String user){
         return status(HttpStatus.OK).body(adminService.getUserByUsername(user));
     }
 

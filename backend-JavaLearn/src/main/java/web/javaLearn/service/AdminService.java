@@ -20,8 +20,8 @@ import static java.util.stream.Collectors.toList;
 @AllArgsConstructor
 public class AdminService {
 
-    private final UserRepository userRepository;
-    private final TokenRepository tokenRepository;
+    private UserRepository userRepository;
+    private TokenRepository tokenRepository;
     ObjectMapper objectMapper;
 
     private String toJson(Object object) throws JsonProcessingException {
@@ -33,8 +33,8 @@ public class AdminService {
         return new ArrayList<>(userRepository.findAll());
     }
 
-    public Optional<User> getUserByUsername(String user) {
-        return userRepository.findByUsername(user);
+    public User getUserByUsername(String user) {
+        return userRepository.findByUsername(user).orElseThrow();
     }
 
     public boolean removeUser(Long id) {

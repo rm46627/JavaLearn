@@ -2,6 +2,8 @@ package web.javaLearn.service;
 
 import lombok.AllArgsConstructor;
 import lombok.SneakyThrows;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -18,16 +20,25 @@ import javax.transaction.Transactional;
 import java.time.LocalDateTime;
 
 @Service
-@AllArgsConstructor
 public class AuthenticationService {
 
-    private final PasswordEncoder passwordEncoder;
-    private final UserRepository userRepository;
-    private final TokenRepository tokenRepository;
-    private final MailService mailService;
-    private final AuthenticationManager authenticationManager;
-    private final JwtProvider jwtProvider;
-    private final JwtRefreshTokenService jwtRefreshTokenService;
+    @Autowired
+    private PasswordEncoder passwordEncoder;
+    @Autowired
+    private UserRepository userRepository;
+    @Autowired
+    private TokenRepository tokenRepository;
+    @Autowired
+    private MailService mailService;
+    @Autowired
+    private AuthenticationManager authenticationManager;
+    @Autowired
+    private JwtProvider jwtProvider;
+    @Autowired
+    private JwtRefreshTokenService jwtRefreshTokenService;
+
+    @Value("${app.website-link}")
+    private String WEBSITE_LINK;
 
     //
     // REGISTRATION
@@ -47,7 +58,7 @@ public class AuthenticationService {
         mailService.sendMail(new ActivationEmail(
             "Java Learn Activation Email",
             user.getEmail(),
-            "Your activation link:" + "http://localhost:8080/api/auth/accountVerification/" + token.getTokenId()));
+            "Your activation link: " + WEBSITE_LINK + "/api/auth/account-verification/" + token.getTokenId()));
 
         return user;
     }
