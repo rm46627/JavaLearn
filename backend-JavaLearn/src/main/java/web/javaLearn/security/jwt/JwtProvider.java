@@ -23,6 +23,7 @@ import java.util.stream.Collectors;
 
 @Component
 public class JwtProvider {
+
     @Value("${app.jwt.secret}")
     private String JWT_SECRET;
     @Value("${app.jwt.expiration-in-ms}")

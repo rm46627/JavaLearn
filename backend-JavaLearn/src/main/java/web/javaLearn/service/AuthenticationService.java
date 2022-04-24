@@ -16,8 +16,6 @@ import web.javaLearn.security.jwt.JwtProvider;
 
 import javax.transaction.Transactional;
 import java.time.LocalDateTime;
-import java.util.Optional;
-import java.util.UUID;
 
 @Service
 @AllArgsConstructor
