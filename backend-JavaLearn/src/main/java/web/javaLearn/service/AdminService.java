@@ -6,6 +6,7 @@ import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import web.javaLearn.model.Role;
 import web.javaLearn.model.User;
 import web.javaLearn.repository.TokenRepository;
 import web.javaLearn.repository.UserRepository;
@@ -19,8 +20,8 @@ import static java.util.stream.Collectors.toList;
 @AllArgsConstructor
 public class AdminService {
 
-    private final UserRepository userRepository;
-    private final TokenRepository tokenRepository;
+    private UserRepository userRepository;
+    private TokenRepository tokenRepository;
     ObjectMapper objectMapper;
 
     private String toJson(Object object) throws JsonProcessingException {
@@ -28,19 +29,28 @@ public class AdminService {
     }
 
     @Transactional(readOnly = true)
-    public List<User> getListOfUsers() {
+    public List<User> getAllUsers() {
         return new ArrayList<>(userRepository.findAll());
     }
 
-    public Optional<User> getUserRecord(String user) {
-        return userRepository.findByUsername(user);
+    public User getUserByUsername(String user) {
+        return userRepository.findByUsername(user).orElseThrow();
     }
 
     public boolean removeUser(Long id) {
+        if(userRepository.findById(id).isPresent()){
+            User user = userRepository.findById(id).orElseThrow();
+            tokenRepository.deleteByUser(user);
+            userRepository.deleteById(id);
+            return true;
+        }
+        return false;
+    }
+
+    public boolean changeRole(Role newRole, Long id){
         boolean isFound = userRepository.existsById(id);
         if(isFound){
-            tokenRepository.deleteById(id);
-            userRepository.deleteById(id);
+            userRepository.updateUserRole(id, newRole);
             return true;
         }
         return false;

@@ -1,26 +1,26 @@
 package web.javaLearn.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.sun.istack.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import javax.validation.constraints.Email;
+import java.time.LocalDateTime;
 
 @Data
-@AllArgsConstructor
 @Entity
+@AllArgsConstructor
 @NoArgsConstructor
 @Builder
+@JsonIgnoreProperties({"hibernateLazyInitializer"})
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long userId;
+    private Long Id;
     @NotNull
     private String username;
     @NotNull
@@ -29,5 +29,12 @@ public class User {
     @NotNull
     private String email;
     private boolean enabled; // is email confirmed
-    private boolean admin;
+    @Enumerated(EnumType.STRING)
+    private Role role;
+    private LocalDateTime createTime;
+
+    @Transient
+    private String accessToken;
+    @Transient
+    private String refreshToken;
 }

@@ -5,62 +5,77 @@ import { LoginRequest } from '../login/login-request';
 import { LoginResponse } from '../login/login-response';
 import { SignupRequest } from '../signup/signup-request';
 import { map } from 'rxjs/operators';
-import { Observable } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
+import { environment } from 'src/environments/environment';
+import { User } from 'src/app/admin/users/user';
+import { Role } from './role.enum';
+import { Router } from '@angular/router';
+
+const API_URL = environment.WEBSITE_URL + '/api/auth'
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
-
-  @Output() loggedIn: EventEmitter<boolean> = new EventEmitter();
-  @Output() username: EventEmitter<string> = new EventEmitter();
-  @Output() admin: EventEmitter<boolean> = new EventEmitter();
   
-  constructor(private httpClient: HttpClient,
-    private localStorage: LocalStorageService) { }
-    
-  signup(signupRequest: SignupRequest){
-    return this.httpClient.post("http://localhost:8080/api/auth/signup", signupRequest, {responseType: 'text'})
+  public currentUser: Observable<User>
+  private currentUserSubject: BehaviorSubject<User>
+  
+  constructor(
+    private router: Router,
+    private httpClient: HttpClient) { 
+
+      let storageUser
+      const storageUserAsStr = localStorage.getItem('currentUser')
+      if(storageUserAsStr) {
+        storageUser = JSON.parse(storageUserAsStr)
+      }
+
+      this.currentUserSubject = new BehaviorSubject<User>(storageUser)
+      this.currentUser = this.currentUserSubject.asObservable()
+    }
+  
+  public get getCurrentUserValue() : User {
+    return this.currentUserSubject.value
   }
-  
-  login(loginRequestPayload: LoginRequest): Observable<boolean> {
-    return this.httpClient.post<LoginResponse>('http://localhost:8080/api/auth/login',
-      loginRequestPayload).pipe(map(data => {
-        this.localStorage.store('authenticationToken', data.authenticationToken)
-        this.localStorage.store('username', data.username)
-        this.localStorage.store('admin', data.admin)
 
-        this.loggedIn.emit(true);
-        this.username.emit(data.username);
-        this.admin.emit(data.admin);
-        return true;
-      }));
+  signup(signupRequest: SignupRequest){
+    return this.httpClient.post(API_URL + "/signup", signupRequest, {responseType: 'text'})
+  }
+
+  login(logReq: LoginRequest) : Observable<any>{
+    return this.httpClient.post<User>(API_URL + "/login", logReq).pipe(
+      map(response => {
+        if(response){
+          this.setUser(response)
+        }
+        return response
+      })
+    )
+  }
+
+  setUser(user: User){
+    localStorage.setItem('currentUser', JSON.stringify(user))
+    this.currentUserSubject.next(user)
   }
 
   logout() {
-    this.localStorage.clear('authenticationToken')
-    this.localStorage.clear('username')
-    this.localStorage.clear('admin')
-
-    this.loggedIn.emit(false);
-    this.username.emit('');
-    this.admin.emit(false);
+    localStorage.removeItem('currentUser')
+    let emptyUser = {} as User;
+    this.currentUserSubject.next(emptyUser)
+    this.router.navigate(['/home'])
   }
 
-  getAuthenticationToken(): string {
-    return this.localStorage.retrieve('authenticationToken')
+  refreshToken(): Observable<any> {
+    return this.httpClient.post(API_URL + "/refresh-token?token=" + this.getCurrentUserValue?.refreshToken, {})
   }
     
-  isLoggedIn(): boolean {
-    return this.getAuthenticationToken() != null
-  }
-  
-  getUserName() {
-    return this.localStorage.retrieve('username')
-  }
+  // isLoggedIn(): boolean {
+  //   return this.currentUserSubject.value.id != 
+  // }
 
   isAdmin(){
-    return this.localStorage.retrieve('admin')
+    return this.currentUserSubject.value.role === Role.ADMIN
   }
 
 }

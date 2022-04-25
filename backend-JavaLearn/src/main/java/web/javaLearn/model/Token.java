@@ -6,6 +6,8 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
+import java.time.LocalDateTime;
 
 @Data
 @AllArgsConstructor
@@ -14,9 +16,11 @@ import javax.persistence.*;
 @Builder
 public class Token {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-    private String token;
+    private String tokenId;
+
     @OneToOne(fetch = FetchType.LAZY)
     private User user;
+
+    private LocalDateTime createDate;
+    private LocalDateTime expirationDate;
 }

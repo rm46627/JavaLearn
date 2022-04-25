@@ -3,6 +3,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from '../shared/auth.service';
 import { SignupRequest } from './signup-request';
 import { Notify } from 'notiflix/build/notiflix-notify-aio';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-signup',
@@ -13,7 +14,8 @@ export class SignupComponent implements OnInit {
   signupForm: FormGroup;
   signupRequest: SignupRequest;
 
-  constructor(private authService : AuthService) {
+  constructor(private authService : AuthService,
+    private router: Router) {
     this.signupForm = new FormGroup ({
       username: new FormControl(null, [Validators.required, Validators.minLength(3)]),
       email: new FormControl(null, [Validators.required, Validators.email]),
@@ -27,7 +29,11 @@ export class SignupComponent implements OnInit {
     };
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    if(this.authService.getCurrentUserValue?.id){
+      this.router.navigate(['/home'])
+    }
+  }
 
   signup(){
     this.signupRequest.username = this.signupForm.get('username')?.value;
@@ -36,11 +42,16 @@ export class SignupComponent implements OnInit {
 
     this.authService.signup(this.signupRequest).subscribe({
       error: (e) => {
+        if(e.status = 409){
+          Notify.warning('Username already exist.')
+        } else {
         console.error(e);
-        Notify.warning('Something went wrong')},
+        Notify.warning('Something went wrong')
+        }},
       complete: () => {
-        console.info('complete'); 
-        Notify.success('Registration successful. Check your email for account activation link')} 
+        console.info('complete') 
+        Notify.success('Registration successful. Check your email for account activation link')
+        this.router.navigate(['/login'])} 
     })
   }
 

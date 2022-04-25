@@ -3,6 +3,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from '../shared/auth.service';
 import { LoginRequest } from './login-request';
 import { Notify } from 'notiflix/build/notiflix-notify-aio';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -13,7 +14,7 @@ export class LoginComponent implements OnInit {
   loginForm: FormGroup
   loginRequest: LoginRequest
 
-  constructor(private authService: AuthService) {
+  constructor(private authService: AuthService, private router: Router) {
     this.loginForm = new FormGroup ({
       username: new FormControl('', Validators.required),
       password: new FormControl('', Validators.required)
@@ -25,7 +26,11 @@ export class LoginComponent implements OnInit {
     };
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    if(this.authService.getCurrentUserValue?.id){
+      // this.router.navigate([])
+    }
+  }
 
   login(){
     this.loginRequest.username = this.loginForm.get('username')?.value
@@ -36,8 +41,9 @@ export class LoginComponent implements OnInit {
         console.error(e)
         Notify.warning('Something went wrong')},
       complete: () => {
-        console.info('complete')
-        Notify.success('You are successfully logged in.')} 
+        Notify.success('You are successfully logged in.') 
+        // this.router.navigate(['/'])}
+      }
     })
   }
 
