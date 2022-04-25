@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { User } from '../admin/users/user';
 import { AuthService } from '../auth/shared/auth.service';
 
 @Component({
@@ -8,22 +9,27 @@ import { AuthService } from '../auth/shared/auth.service';
 })
 export class HeaderComponent implements OnInit {
 
-  isLoggedIn: boolean = false
-  isAdmin: boolean = false
-  username: string
+  currentUser: User
 
   constructor(private authService: AuthService) {
-    this.username = this.authService.getUserName()
+    this.currentUser = {} as User;
+    this.authService.currentUser.subscribe(data => {
+      this.currentUser = data
+    });
   }
 
-  ngOnInit(): void {
-    this.authService.loggedIn.subscribe((data: boolean) => this.isLoggedIn = data)
-    this.authService.admin.subscribe((data: boolean) => this.isAdmin = data)
-    this.authService.username.subscribe((data: string) => this.username = data)
+  ngOnInit(): void {}
+
+  isAdmin() : boolean {
+    return this.authService.isAdmin()
   }
 
   logout(): void {
     this.authService.logout()
   }
+
+  // isLoggedIn(): boolean {
+  //   return this.authService.isLoggedIn()
+  // }
 
 }

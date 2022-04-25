@@ -5,19 +5,20 @@
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-      <div class="navbar-nav" *ngIf="!isLoggedIn">
+      <div class="navbar-nav" *ngIf="!currentUser?.id">
         <a class="nav-link active navbtn" routerLink="/signup">Register</a>
         <a class="nav-link active navbtn" href="/login">Login</a>
       </div>
-      <div class="navbar-nav" *ngIf="isLoggedIn">
+      <div class="navbar-nav" *ngIf="currentUser?.id">
         <div *ngIf="!isAdmin">
-          <a class="nav-link active navbtn" routerLink="/profile">{{username}}</a>
+          <a class="nav-link active navbtn" routerLink="/profile">{{currentUser.username}}</a>
         </div>
         <div *ngIf="isAdmin">
-          <a class="nav-link active navbtn" routerLink="/admin">{{username}}</a>
+          <a class="nav-link active navbtn" routerLink="/admin">{{currentUser.username}}</a>
         </div>
         <a class="nav-link active navbtn" routerLink="/courses">Courses</a>
         <a class="nav-link active navbtn" (click)="logout()">Logout</a>
+        <a class="nav-link active navbtn" >admin: {{isAdmin()}}</a>
       </div>
     </div>
   </div>
