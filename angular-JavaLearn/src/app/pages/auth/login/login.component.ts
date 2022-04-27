@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { AuthService } from '../shared/auth.service';
-import { LoginRequest } from './login-request';
+import { AuthService } from '../../../services/auth.service';
+import { LoginRequest } from '../../../models/login-request';
 import { Notify } from 'notiflix/build/notiflix-notify-aio';
 import { Router } from '@angular/router';
 

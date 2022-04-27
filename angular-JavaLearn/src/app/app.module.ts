@@ -3,17 +3,18 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { HeaderComponent } from './header/header.component';
-import { SignupComponent } from './auth/signup/signup.component';
-import { LoginComponent } from './auth/login/login.component';
+import { HeaderComponent } from './components/header/header.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { NgxWebstorageModule } from 'ngx-webstorage';
-import { HomeComponent } from './home/home.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { BsDropdownModule,BsDropdownConfig } from 'ngx-bootstrap/dropdown';
-import { MenuComponent } from './admin/menu/menu.component';
-import { UsersComponent } from './admin/users/users.component';
+import { AdminMenuComponent } from './pages/admin/adminMenu/adminMenu.component';
+import { UsersComponent } from './pages/admin/users/users.component';
+import { HomeComponent } from './pages/home/home.component';
+import { LoginComponent } from './pages/auth/login/login.component';
+import { SignupComponent } from './pages/auth/signup/signup.component';
+import { ProfileComponent } from './pages/profile/profile.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -21,8 +22,9 @@ import { UsersComponent } from './admin/users/users.component';
     SignupComponent,
     LoginComponent,
     HomeComponent,
-    MenuComponent,
-    UsersComponent
+    AdminMenuComponent,
+    UsersComponent,
+    ProfileComponent
   ],
   imports: [
     BrowserModule,
