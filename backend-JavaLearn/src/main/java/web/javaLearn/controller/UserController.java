@@ -4,9 +4,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+import web.javaLearn.model.LoginRequest;
 import web.javaLearn.security.UserPrincipal;
 import web.javaLearn.service.UserService;
 
@@ -20,5 +19,11 @@ public class UserController {
     @GetMapping("/profile")
     public ResponseEntity<?> getInfo(@AuthenticationPrincipal UserPrincipal userPrincipal){
         return new ResponseEntity<>(userService.getInfo(userPrincipal.getUsername()), HttpStatus.OK);
+    }
+
+    @DeleteMapping("/removeuser")
+    public ResponseEntity<?> signIn(@RequestBody LoginRequest loginRequest)
+    {
+        return new ResponseEntity<>(userService.removeUser(loginRequest), HttpStatus.OK);
     }
 }

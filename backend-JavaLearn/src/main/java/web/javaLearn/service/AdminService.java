@@ -37,6 +37,7 @@ public class AdminService {
         return userRepository.findById(id).orElseThrow();
     }
 
+    @Transactional
     public boolean removeUser(Long id) {
         if(userRepository.findById(id).isPresent()){
             User user = userRepository.findById(id).orElseThrow();
