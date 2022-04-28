@@ -26,8 +26,8 @@ public class AdminController {
     }
 
     @GetMapping("/users/{user}")
-    public ResponseEntity<User> getUser(@PathVariable String user){
-        return status(HttpStatus.OK).body(adminService.getUserByUsername(user));
+    public ResponseEntity<User> getUser(@PathVariable Long id){
+        return status(HttpStatus.OK).body(adminService.getUserByUsername(id));
     }
 
     @DeleteMapping("/removeuser/{id}")

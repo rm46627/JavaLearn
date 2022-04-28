@@ -25,3 +25,7 @@ h4 {
 .smallColumn {
     width: 25%;
   }
+
+.clickable {
+    cursor: pointer;
+}

@@ -1,4 +1,4 @@
-import { Role } from "src/app/auth/shared/role.enum"
+import { Role } from "src/app/models/role.enum"
 
 export interface User {
     id: bigint

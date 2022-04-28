@@ -1,14 +1,12 @@
 import { HttpClient } from '@angular/common/http';
-import { EventEmitter, Injectable, Output } from '@angular/core';
-import { LocalStorageService } from 'ngx-webstorage';
-import { LoginRequest } from '../login/login-request';
-import { LoginResponse } from '../login/login-response';
-import { SignupRequest } from '../signup/signup-request';
+import { Injectable} from '@angular/core';
+import { LoginRequest } from '../models/login-request';
+import { SignupRequest } from '../models/signup-request';
 import { map } from 'rxjs/operators';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
-import { User } from 'src/app/admin/users/user';
-import { Role } from './role.enum';
+import { User } from 'src/app/models/user';
+import { Role } from '../models/role.enum';
 import { Router } from '@angular/router';
 
 const API_URL = environment.WEBSITE_URL + '/api/auth'

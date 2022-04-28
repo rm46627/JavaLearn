@@ -33,8 +33,8 @@ public class AdminService {
         return new ArrayList<>(userRepository.findAll());
     }
 
-    public User getUserByUsername(String user) {
-        return userRepository.findByUsername(user).orElseThrow();
+    public User getUserByUsername(Long id) {
+        return userRepository.findById(id).orElseThrow();
     }
 
     public boolean removeUser(Long id) {
