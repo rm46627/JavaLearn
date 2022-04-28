@@ -22,7 +22,7 @@ export class HeaderComponent implements OnInit {
   ngOnInit(): void {}
 
   profile(){
-    this.router.navigate(['/profile', this.authService.getCurrentUserValue.id])
+    this.router.navigate(['/profile'], {state:this.authService.getCurrentUserValue})
   }
 
   isAdmin() : boolean {

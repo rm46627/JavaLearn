@@ -29,7 +29,7 @@ const routes: Routes = [
   { path: 'profile',
     component: ProfileComponent,
     canActivate: [AuthGuard],
-    data: {roles: [Role.ADMIN]}
+    data: {roles: [Role.ADMIN, Role.USER]}
   },
 
   // {path: '**', redirectTo: 'home' }

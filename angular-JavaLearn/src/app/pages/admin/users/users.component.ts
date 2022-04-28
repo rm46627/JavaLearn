@@ -24,6 +24,6 @@ export class UsersComponent implements OnInit {
 
   detail(user: User){
     // this.router.navigate(['/profile', user.id], {state:user})
-    this.router.navigate(['/profile', user])
+    this.router.navigate(['/profile'], {state:user})
   }
 }
