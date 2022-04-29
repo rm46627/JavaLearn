@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { Notify } from 'notiflix/build/notiflix-notify-aio';
+import { ModalComponent } from 'src/app/components/modal/modal.component';
 import { Role } from 'src/app/models/role.enum';
 import { User } from 'src/app/models/user';
 import { AdminService } from 'src/app/services/admin.service';
@@ -16,7 +17,11 @@ export class ProfileComponent implements OnInit{
 
   user: User = {} as User
 
-  constructor(private authService: AuthService, private userService: UserService, private adminService: AdminService, private router: Router) {
+  constructor(
+    private authService: AuthService, 
+    private userService: UserService, 
+    private adminService: AdminService, 
+    private router: Router) {
     this.user = Object.assign({} as User, this.router.getCurrentNavigation()?.extras.state)
   }
   
@@ -32,15 +37,14 @@ export class ProfileComponent implements OnInit{
     }
   }
 
+  isAdmin() : boolean {
+    return this.authService.isAdmin()
+  }
+
   delete(){
-    if(this.authService.getCurrentUserValue.role === Role.ADMIN){
-      Notify.warning('Usuwasz uzytkownika')
-      this.adminService.deleteUser(this.user.id)
-      this.router.navigate(["admin/users"])
-    } else {
-      this.content.open();
-      // this.userService.deleteUser()
-    }
+    Notify.success('User deleted.')
+    this.adminService.deleteUser(this.user.id)
+    this.router.navigate(["admin/users"])
   }
 
 }

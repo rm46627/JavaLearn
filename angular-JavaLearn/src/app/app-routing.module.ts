@@ -32,7 +32,7 @@ const routes: Routes = [
     data: {roles: [Role.ADMIN, Role.USER]}
   },
 
-  // {path: '**', redirectTo: 'home' }
+  {path: '**', redirectTo: 'home' }
 
 ];
 
