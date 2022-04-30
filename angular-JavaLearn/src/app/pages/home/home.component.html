@@ -18,9 +18,16 @@
     </div>
     <div class="smallColumn"></div>
 </div>
-<div class="end">
+<div class="end" *ngIf="this.isLoggedIn()">
+    <div class="row"></div>
+    <h1 >Welocme!</h1>
+    <button class="btn btn-light btn-lg btn-huge" type="button" routerLink="/courses" >Go to our courses!</button>
+    <p>Made by github.com/rm46627</p>
+</div>
+<div class="end" *ngIf="!this.isLoggedIn()">
     <div class="row"></div>
     <h1 >Join us today!</h1>
     <button class="btn btn-light btn-lg btn-huge" type="button" routerLink="/signup" >Register!</button>
     <p>Made by github.com/rm46627</p>
 </div>
+    

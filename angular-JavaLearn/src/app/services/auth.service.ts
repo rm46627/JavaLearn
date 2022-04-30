@@ -61,19 +61,18 @@ export class AuthService {
     localStorage.removeItem('currentUser')
     let emptyUser = {} as User;
     this.currentUserSubject.next(emptyUser)
-    this.router.navigate(['/home'])
+    this.router.navigate(['/'])
   }
 
   refreshToken(): Observable<any> {
     return this.httpClient.post(API_URL + "/refresh-token?token=" + this.getCurrentUserValue?.refreshToken, {})
   }
-    
-  // isLoggedIn(): boolean {
-  //   return this.currentUserSubject.value.id != 
-  // }
 
   isAdmin(){
     return this.currentUserSubject.value.role === Role.ADMIN
   }
 
+  isLoggedIn(){
+    return localStorage.getItem('currentUser') !== null
+  }
 }

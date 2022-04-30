@@ -42,7 +42,7 @@ export class LoginComponent implements OnInit {
         Notify.warning('Something went wrong')},
       complete: () => {
         Notify.success('You are successfully logged in.') 
-        // this.router.navigate(['/'])}
+        this.router.navigate(['/home'])
       }
     })
   }

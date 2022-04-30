@@ -10,7 +10,6 @@ import { ModalModule, BsModalService } from 'ngx-bootstrap/modal';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './components/header/header.component';
-
 import { AdminMenuComponent } from './pages/admin/adminMenu/adminMenu.component';
 import { UsersComponent } from './pages/admin/users/users.component';
 import { HomeComponent } from './pages/home/home.component';
@@ -20,6 +19,8 @@ import { ProfileComponent } from './pages/profile/profile.component';
 import { ModalComponent } from './components/modal/modal.component';
 import { CourseMakerComponent } from './pages/admin/courseMaker/courseMaker.component';
 import { AuthInterceptorProviders } from './interceptors/auth.interceptor';
+
+import {MatSliderModule} from '@angular/material/slider'
 @NgModule({
   declarations: [
     AppComponent,
@@ -42,7 +43,8 @@ import { AuthInterceptorProviders } from './interceptors/auth.interceptor';
     NgxWebstorageModule.forRoot(),
     BrowserAnimationsModule,
     BsDropdownModule.forRoot(),
-    ModalModule
+    ModalModule,
+    MatSliderModule
   ],
   providers: [BsDropdownConfig, BsModalService, AuthInterceptorProviders],
   bootstrap: [AppComponent]
