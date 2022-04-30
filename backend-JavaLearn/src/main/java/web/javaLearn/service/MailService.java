@@ -7,6 +7,8 @@ import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.mail.javamail.MimeMessagePreparator;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
+import org.thymeleaf.TemplateEngine;
+import org.thymeleaf.context.Context;
 import web.javaLearn.model.ActivationEmail;
 
 @Service
@@ -28,5 +30,18 @@ public class MailService {
         };
         mailSender.send(messagePreparator);
         log.info("Email sent.");
+    }
+}
+
+@Service
+@AllArgsConstructor
+class MailContentBuilder {
+
+    private final TemplateEngine templateEngine;
+
+    String build(String message){
+        Context context = new Context();
+        context.setVariable("message", message);
+        return templateEngine.process("mailTemplate", context);
     }
 }

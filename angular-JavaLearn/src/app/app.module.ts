@@ -18,6 +18,8 @@ import { LoginComponent } from './pages/auth/login/login.component';
 import { SignupComponent } from './pages/auth/signup/signup.component';
 import { ProfileComponent } from './pages/profile/profile.component';
 import { ModalComponent } from './components/modal/modal.component';
+import { CourseMakerComponent } from './pages/admin/courseMaker/courseMaker.component';
+import { AuthInterceptorProviders } from './interceptors/auth.interceptor';
 @NgModule({
   declarations: [
     AppComponent,
@@ -29,6 +31,7 @@ import { ModalComponent } from './components/modal/modal.component';
     UsersComponent,
     ProfileComponent,
     ModalComponent,
+    CourseMakerComponent,
   ],
   imports: [
     BrowserModule,
@@ -41,7 +44,7 @@ import { ModalComponent } from './components/modal/modal.component';
     BsDropdownModule.forRoot(),
     ModalModule
   ],
-  providers: [BsDropdownConfig, BsModalService],
+  providers: [BsDropdownConfig, BsModalService, AuthInterceptorProviders],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
