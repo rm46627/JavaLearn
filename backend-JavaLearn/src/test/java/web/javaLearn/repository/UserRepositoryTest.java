@@ -7,7 +7,7 @@
 //import org.springframework.beans.factory.annotation.Autowired;
 //import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 //import org.springframework.test.context.junit4.SpringRunner;
-//import web.javaLearn.model.User;
+//import web.javaLearn.model.auth.User;
 //import web.javaLearn.service.AuthService;
 //
 //import java.util.Optional;

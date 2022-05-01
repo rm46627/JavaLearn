@@ -8,7 +8,7 @@
 //import org.mockito.Mockito;
 //import org.mockito.junit.MockitoJUnitRunner;
 //import org.springframework.security.core.userdetails.UserDetails;
-//import web.javaLearn.model.User;
+//import web.javaLearn.model.auth.User;
 //import web.javaLearn.repository.UserRepository;
 //import web.javaLearn.security.CustomUserDetailsService;
 //

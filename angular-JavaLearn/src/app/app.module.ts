@@ -44,7 +44,6 @@ import {MatSliderModule} from '@angular/material/slider'
     BrowserAnimationsModule,
     BsDropdownModule.forRoot(),
     ModalModule,
-    MatSliderModule
   ],
   providers: [BsDropdownConfig, BsModalService, AuthInterceptorProviders],
   bootstrap: [AppComponent]

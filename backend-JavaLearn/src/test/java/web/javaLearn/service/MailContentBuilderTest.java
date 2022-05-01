@@ -10,7 +10,7 @@
 //import org.mockito.junit.MockitoJUnitRunner;
 //import org.thymeleaf.TemplateEngine;
 //import org.thymeleaf.context.Context;
-//import web.javaLearn.model.User;
+//import web.javaLearn.model.auth.User;
 //
 //import static org.mockito.ArgumentMatchers.*;
 //import static org.mockito.Mockito.when;

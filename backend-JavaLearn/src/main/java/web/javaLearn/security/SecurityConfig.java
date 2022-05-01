@@ -14,7 +14,7 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
-import web.javaLearn.model.Role;
+import web.javaLearn.model.auth.Role;
 import web.javaLearn.security.jwt.JwtAuthorizationFilter;
 
 @Configuration

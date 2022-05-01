@@ -6,13 +6,11 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import web.javaLearn.model.LoginRequest;
-import web.javaLearn.model.User;
+import web.javaLearn.model.auth.LoginRequest;
+import web.javaLearn.model.auth.User;
 import web.javaLearn.repository.TokenRepository;
 import web.javaLearn.repository.UserRepository;
 import web.javaLearn.security.UserPrincipal;
-
-import javax.management.remote.JMXAuthenticator;
 
 @Service
 public class UserService {

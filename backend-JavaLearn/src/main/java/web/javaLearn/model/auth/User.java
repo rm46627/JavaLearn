@@ -1,4 +1,4 @@
-package web.javaLearn.model;
+package web.javaLearn.model.auth;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.sun.istack.NotNull;

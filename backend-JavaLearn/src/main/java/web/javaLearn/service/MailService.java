@@ -9,7 +9,7 @@ import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 import org.thymeleaf.TemplateEngine;
 import org.thymeleaf.context.Context;
-import web.javaLearn.model.ActivationEmail;
+import web.javaLearn.model.auth.ActivationEmail;
 
 @Service
 @AllArgsConstructor

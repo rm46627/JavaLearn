@@ -8,7 +8,7 @@ import org.mockito.Mockito;
 import org.mockito.junit.MockitoJUnitRunner;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessagePreparator;
-import web.javaLearn.model.ActivationEmail;
+import web.javaLearn.model.auth.ActivationEmail;
 
 import static org.mockito.Mockito.*;
 

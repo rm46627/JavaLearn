@@ -1,4 +1,4 @@
-package web.javaLearn.model;
+package web.javaLearn.model.auth;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

@@ -2,7 +2,6 @@ package web.javaLearn.utils;
 
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.util.StringUtils;
-import web.javaLearn.model.Role;
 
 import javax.servlet.http.HttpServletRequest;
 

@@ -5,7 +5,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
-import web.javaLearn.model.LoginRequest;
+import web.javaLearn.model.auth.LoginRequest;
 import web.javaLearn.security.UserPrincipal;
 import web.javaLearn.service.UserService;
 

@@ -3,18 +3,15 @@ package web.javaLearn.service;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.AllArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import web.javaLearn.model.Role;
-import web.javaLearn.model.User;
+import web.javaLearn.model.auth.Role;
+import web.javaLearn.model.auth.User;
 import web.javaLearn.repository.TokenRepository;
 import web.javaLearn.repository.UserRepository;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
-import static java.util.stream.Collectors.toList;
 
 @Service
 @AllArgsConstructor
