@@ -20,7 +20,12 @@ import { ModalComponent } from './components/modal/modal.component';
 import { CourseMakerComponent } from './pages/admin/courseMaker/courseMaker.component';
 import { AuthInterceptorProviders } from './interceptors/auth.interceptor';
 
-import {MatSliderModule} from '@angular/material/slider'
+import {MatInputModule} from '@angular/material/input';
+import {MatButtonToggleModule} from '@angular/material/button-toggle';
+import {MatIconModule} from '@angular/material/icon';
+import {MatSelectModule} from '@angular/material/select';
+import {MatButtonModule} from '@angular/material/button';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -32,7 +37,7 @@ import {MatSliderModule} from '@angular/material/slider'
     UsersComponent,
     ProfileComponent,
     ModalComponent,
-    CourseMakerComponent,
+    CourseMakerComponent
   ],
   imports: [
     BrowserModule,
@@ -44,6 +49,11 @@ import {MatSliderModule} from '@angular/material/slider'
     BrowserAnimationsModule,
     BsDropdownModule.forRoot(),
     ModalModule,
+    MatButtonToggleModule,
+    MatInputModule,
+    MatIconModule,
+    MatSelectModule,
+    MatButtonModule
   ],
   providers: [BsDropdownConfig, BsModalService, AuthInterceptorProviders],
   bootstrap: [AppComponent]

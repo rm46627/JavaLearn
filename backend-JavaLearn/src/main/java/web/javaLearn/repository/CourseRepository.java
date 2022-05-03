@@ -8,6 +8,6 @@ import web.javaLearn.model.course.Course;
 import java.util.Optional;
 
 @Repository
-public interface CourseRepository extends JpaRepository<Token, Long> {
+public interface CourseRepository extends JpaRepository<Course, Long> {
     Optional<Course> findByName(String name);
 }

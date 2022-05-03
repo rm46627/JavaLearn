@@ -1,26 +1,125 @@
-<div class="row">
-    <div class="smallColumn"></div>
-    <div class="column">
-        <div class="pt-5">
-            <div class="card">
-                <div class="card-header">
-                    <button class="btn btn-secondary" type="button">Add image</button>
-                    <button class="btn btn-secondary" type="button">Make this page coding challange</button>
-                </div>
-                <div class="card-body">
-                    <div class="row">
-                        <div class="smallColumn"></div>
-                        <div class="column">
-                            <div class="row">
-                                <div class="d-grid gap-2">
-                                </div>
-                            </div>
-                        </div>
-                        <div class="smallColumn"></div>
-                    </div>
-                </div>
-            </div>
+<div class="container">
+    <div class="pt-5">
+      <div class="card">
+        <div class="card-header">
+            <mat-button-toggle-group #group="matButtonToggleGroup">
+                <mat-button-toggle #textBtn>Text page</mat-button-toggle>
+                <mat-button-toggle #quizBtn>Quiz</mat-button-toggle>
+                <mat-button-toggle #codingBtn>Coding challange</mat-button-toggle>
+              </mat-button-toggle-group>
         </div>
+        <div class="card-body">
+
+            <!--
+               Text
+            -->
+
+            <div *ngIf="textBtn.checked">
+              <div class="form-group">
+                <label for="textPage">Text</label>
+                <textarea class="form-control" id="textPage" rows="5"></textarea>
+              </div>
+            </div>
+
+            <!--
+               Quiz
+             -->
+            <div *ngIf="quizBtn.checked">
+              <form [formGroup]="quizForm" (ngSubmit)="savePage()">
+
+                <div class="quizMakerHeader" formGroupName="quizDetails">
+                  <mat-form-field appearance="standard">
+                    <mat-label>Quiz title</mat-label>
+                    <input matInput formControlName="quizTitle">
+                  </mat-form-field>
+                  <label for="textPage">Description:</label>
+                  <textarea class="form-control" formControlName="description" rows="5"></textarea>
+                  <button mat-raised-button (click)="addQuestion()">Add question</button>
+                </div>
+
+                <hr />
+
+                <div formArrayName="questions">
+                  <div
+                    class="questions"
+                    *ngFor="
+                      let question of quizForm.get('questions').controls;
+                      let questionIndex = index
+                    "
+                    [formGroupName]="questionIndex"
+                  >
+                    <mat-form-field appearance="standard">
+                      <mat-label>Question</mat-label>
+                      <input matInput formControlName="question">
+                    </mat-form-field>
+                    <div>
+                      <button mat-raised-button (click)="deleteQuestion(question)">Delete question</button>
+                      <button mat-raised-button (click)="addAnswer(question)">Add answer</button>
+                    </div>
+
+                    <div class="answers" formArrayName="answers">
+                      <div
+                        class="answers"
+                        *ngFor="
+                          let answer of question.get('answers').controls;
+                          let answerIndex = index
+                        "
+                        [formGroupName]="answerIndex"
+                      >
+
+                        <mat-form-field appearance="standard">
+                          <mat-label>Answer</mat-label>
+                          <input matInput formControlName="answer">
+                        </mat-form-field>
+                        <mat-form-field appearance="standard">
+                          <mat-select formControlName="isItCorrect"
+                          placeholder="Is answer correct?">
+                          <mat-option value="text">Yes</mat-option>
+                          <mat-option value="code">No</mat-option>
+                        </mat-select>
+                      </mat-form-field>
+                      <mat-icon class="delete-btn" (click)="deleteAnswer(question, answerIndex)">delete_forever</mat-icon>
+                      </div>
+                    </div>
+                    <hr />
+                  </div>
+                </div>
+              </form>
+            </div>
+
+            <!--
+              Coding
+            -->
+
+            <div *ngIf="codingBtn.checked">
+              <form [formGroup]="codeForm" (ngSubmit)="savePage()">
+                <mat-form-field appearance="fill">
+                  <input matInput
+                  formControlName="pageTitle"
+                  placeholder="Page title">
+                </mat-form-field>
+                <p>
+                  <mat-icon class="add-btn" (click)="addCodeGroup()">add</mat-icon>
+                </p>
+                <ng-container formArrayName="codeGroups">
+                  <ng-container *ngFor="let lessonForm of codeFields.controls; let i = index">
+                    <div [formGroupName]="i">
+                      <textarea class="form-control" formControlName="text" rows="5"></textarea>
+                      <mat-form-field appearance="fill">
+                          <mat-select formControlName="type"
+                                  placeholder="Area type">
+                              <mat-option value="text">Text</mat-option>
+                              <mat-option value="code">Code</mat-option>
+                          </mat-select>
+                      </mat-form-field>
+                      <mat-icon class="delete-btn" (click)="deleteCodeGroup(i)">delete_forever</mat-icon>
+                  </div>
+                  </ng-container>
+                </ng-container>
+              </form>
+            </div>
+
+        </div>
+      </div>
     </div>
-    <div class="smallColumn"></div>
-</div>
+  </div>

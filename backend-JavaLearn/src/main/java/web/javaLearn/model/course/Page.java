@@ -1,11 +1,13 @@
 package web.javaLearn.model.course;
 
+import lombok.Builder;
 import lombok.Data;
 
 import javax.persistence.*;
 
 @Data
 @Entity
+@Builder
 public class Page {
 
     @Id

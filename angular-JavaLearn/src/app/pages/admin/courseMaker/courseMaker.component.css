@@ -1,0 +1,22 @@
+.quizMakerHeader {
+    display: flex;
+    flex-direction: column;
+}
+button {
+    max-width:10em;
+    white-space:nowrap;
+    overflow:hidden;
+    margin-right: 10px;
+}
+
+.mat-raised-button {
+    margin-top: 20px;
+}
+
+.answers {
+    margin-left: 25px;
+}
+
+.answers > * {
+    margin-right: 10px;
+}
