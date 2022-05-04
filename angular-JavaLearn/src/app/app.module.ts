@@ -25,6 +25,11 @@ import {MatButtonToggleModule} from '@angular/material/button-toggle';
 import {MatIconModule} from '@angular/material/icon';
 import {MatSelectModule} from '@angular/material/select';
 import {MatButtonModule} from '@angular/material/button';
+import {PreviewModalComponent} from './components/preview-modal/preview-modal.component';
+import { PageMakerComponent } from './pages/admin/courseMaker/page-maker/page-maker.component';
+import { CodingPageComponent } from './pages/admin/courseMaker/page-maker/coding-page/coding-page.component';
+import { QuizPageComponent } from './pages/admin/courseMaker/page-maker/quiz-page/quiz-page.component';
+import { TextPageComponent } from './pages/admin/courseMaker/page-maker/text-page/text-page.component';
 
 @NgModule({
   declarations: [
@@ -37,7 +42,12 @@ import {MatButtonModule} from '@angular/material/button';
     UsersComponent,
     ProfileComponent,
     ModalComponent,
-    CourseMakerComponent
+    CourseMakerComponent,
+    PreviewModalComponent,
+    PageMakerComponent,
+    TextPageComponent,
+    QuizPageComponent,
+    CodingPageComponent
   ],
   imports: [
     BrowserModule,

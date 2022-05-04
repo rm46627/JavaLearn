@@ -1,0 +1,59 @@
+<form [formGroup]="quizForm" (ngSubmit)="savePage()">
+  
+    <div class="courseMakerHeader addMargin" formGroupName="quizDetails">
+      <mat-form-field appearance="standard">
+        <mat-label>Quiz title</mat-label>
+        <input matInput formControlName="quizTitle" (focusout)="savePage()">
+      </mat-form-field>
+      <label for="textPage">Description:</label>
+      <textarea class="form-control" formControlName="description" rows="5" (focusout)="savePage()" (keydown)="handleKeydown($event)"></textarea>
+      <button mat-raised-button (click)="addQuestion()">Add question</button>
+    </div>
+
+    <hr />
+
+    <div formArrayName="questions">
+      <div
+        class="addMargin"
+        *ngFor="
+          let question of quizForm.get('questions').controls;
+          let questionIndex = index
+        "
+        [formGroupName]="questionIndex"
+      >
+        <mat-form-field appearance="standard">
+          <mat-label>Question</mat-label>
+          <input matInput formControlName="question" (focusout)="savePage()">
+        </mat-form-field>
+        <div>
+          <button mat-raised-button (click)="deleteQuestion(question); savePage()">Delete question</button>
+          <button mat-raised-button (click)="addAnswer(question); savePage()">Add answer</button>
+        </div>
+
+        <div class="addMargin" formArrayName="answers">
+          <div
+            class="addMargin"
+            *ngFor="
+              let answer of question.get('answers').controls;
+              let answerIndex = index
+            "
+            [formGroupName]="answerIndex"
+          >
+
+            <mat-form-field appearance="standard">
+              <mat-label>Answer</mat-label>
+              <input matInput formControlName="answer" (focusout)="savePage()">
+            </mat-form-field>
+              <mat-form-field appearance="standard">
+                <mat-select formControlName="isItCorrect" placeholder="Is answer correct?" (focusout)="savePage()">
+                <mat-option value="text">Yes</mat-option>
+                <mat-option value="code">No</mat-option>
+              </mat-select>
+            </mat-form-field>
+          <mat-icon class="delete-btn" (click)="deleteAnswer(question, answerIndex); savePage()">delete_forever</mat-icon>
+          </div>
+        </div>
+        <hr />
+      </div>
+    </div>
+  </form>

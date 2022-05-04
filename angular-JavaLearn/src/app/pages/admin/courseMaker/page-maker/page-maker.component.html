@@ -1,0 +1,29 @@
+<div class="container">
+  <div class="pt-5">
+    <div class="card">
+      <div class="card-header">
+        <app-preview-modal></app-preview-modal>
+        <mat-button-toggle-group #group="matButtonToggleGroup" [(ngModel)]="pageType">
+            <mat-button-toggle value="text" #textBtn>Text page</mat-button-toggle>
+            <mat-button-toggle value="quiz" #quizBtn>Quiz</mat-button-toggle>
+            <mat-button-toggle value="coding" #codingBtn>Coding challange</mat-button-toggle>
+          </mat-button-toggle-group>
+      </div>
+      <div class="card-body">
+
+          <div *ngIf="textBtn.checked">
+            <app-text-page></app-text-page>
+          </div>
+
+          <div *ngIf="quizBtn.checked">
+            <app-quiz-page></app-quiz-page>
+          </div>
+
+          <div *ngIf="codingBtn.checked">
+            <app-coding-page></app-coding-page>
+          </div>
+
+      </div>
+    </div>
+  </div>
+</div>

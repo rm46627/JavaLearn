@@ -1,0 +1,26 @@
+<form [formGroup]="codeForm" (ngSubmit)="savePage()">
+    <div class="courseMakerHeader addMargin">
+      <mat-form-field appearance="standard">
+        <mat-label>Page title</mat-label>
+        <input matInput formControlName="pageTitle">
+      </mat-form-field>
+      <mat-icon class="add-btn" (click)="addCodeGroup(); savePage()">add</mat-icon>
+    </div>
+
+    <ng-container formArrayName="codeGroups">
+      <ng-container *ngFor="let lessonForm of codeFields.controls; let i = index">
+        <div class="addMargin" [formGroupName]="i">
+          <mat-form-field appearance="standard">
+            <mat-select formControlName="type"
+                    placeholder="Area type">
+                <mat-option value="text">Text</mat-option>
+                <mat-option value="code">Code</mat-option>
+            </mat-select>
+        </mat-form-field>
+        <mat-icon class="delete-btn" (click)="deleteCodeGroup(i); savePage()">delete_forever</mat-icon>
+        <textarea class="form-control" formControlName="text" rows="5" (focusout)="savePage()" (keydown)="handleKeydown($event)"></textarea>
+        <hr />
+      </div>
+      </ng-container>
+    </ng-container>
+</form>

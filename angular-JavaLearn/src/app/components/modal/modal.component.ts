@@ -17,8 +17,8 @@ export class ModalComponent implements OnInit {
   loginForm: FormGroup
   loginRequest: LoginRequest
 
-   modalRef!: BsModalRef;
-   constructor(private modalService: BsModalService, private userService: UserService, private authService: AuthService, private router: Router) {
+  modalRef!: BsModalRef;
+  constructor(private modalService: BsModalService, private userService: UserService, private authService: AuthService, private router: Router) {
     this.loginForm = new FormGroup ({
       username: new FormControl('', Validators.required),
       password: new FormControl('', Validators.required)
@@ -28,13 +28,13 @@ export class ModalComponent implements OnInit {
       username: '',
       password: ''
     };
-   }
+  }
 
-   openModal(template: TemplateRef<any>) {
-      this.modalRef = this.modalService.show(template);
-   }
+  openModal(template: TemplateRef<any>) {
+    this.modalRef = this.modalService.show(template);
+  }
 
-   verify(){
+  verify(){
     this.loginRequest.username = this.loginForm.get('username')?.value
     this.loginRequest.password = this.loginForm.get('password')?.value
 
@@ -52,6 +52,5 @@ export class ModalComponent implements OnInit {
     this.router.navigate(["home"])
   }
 
-   ngOnInit(): void {
-   }
+   ngOnInit(): void {}
 }

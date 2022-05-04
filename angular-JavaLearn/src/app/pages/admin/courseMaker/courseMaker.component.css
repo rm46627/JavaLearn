@@ -1,4 +1,4 @@
-.quizMakerHeader {
+.courseMakerHeader {
     display: flex;
     flex-direction: column;
 }
@@ -13,10 +13,17 @@ button {
     margin-top: 20px;
 }
 
-.answers {
+.addMargin {
     margin-left: 25px;
+    margin-right: 25px;
 }
 
 .answers > * {
     margin-right: 10px;
+}
+
+.card-header {
+    display:flex;
+    align-items: center;
+    justify-content: space-evenly;
 }
