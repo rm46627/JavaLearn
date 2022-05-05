@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Notify } from 'notiflix';
 import { environment } from 'src/environments/environment';
 import { LoginRequest } from '../models/login-request';
 import { AuthService } from './auth.service';
@@ -17,7 +17,15 @@ export class UserService extends RequestBaseService {
     super(authService, httpClient)
   }
 
-  deleteUser(logReq: LoginRequest): Observable<any> {
+  deleteUser(logReq: LoginRequest) {
     return this.httpClient.delete(API_URL + '/removeuser', {headers: this.getHeaders, body: logReq})
+    .subscribe({
+      error: (e) => {
+        console.error(e)
+        Notify.warning('Something went wrong')},
+      complete: () => {
+        Notify.success('You are successfully deleted your account.') 
+      }
+    })
   }
 }

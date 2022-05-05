@@ -36,18 +36,18 @@ public class CourseRepositoryTest {
                 .build();
 
         Course c = Course.builder()
-                .name("Kurs Kotlina")
+                .title("Kurs Kotlina")
                 .description("Opis mojego nowego kursu.")
                 .pageList(Arrays.asList(p1, p2))
                 .build();
 
         courseRepository.save(c);
-        Course c2 = courseRepository.findByName(c.getName()).orElseThrow();
+        Course c2 = courseRepository.findByTitle(c.getTitle()).orElseThrow();
 
         Assert.assertEquals(c2.getDescription(), c.getDescription());
 
         courseRepository.delete(c2);
-        Assert.assertFalse(courseRepository.findByName(c.getName()).isPresent());
+        Assert.assertFalse(courseRepository.findByTitle(c.getTitle()).isPresent());
 
     }
 

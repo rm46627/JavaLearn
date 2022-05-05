@@ -1,7 +1,7 @@
 import { Component, Input, OnInit, SimpleChanges, TemplateRef } from '@angular/core';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
-import { Page } from 'src/app/models/page/Page';
-import { CourseMakerService } from 'src/app/services/course-maker.service';
+import { Page } from 'src/app/models/course/Page';
+import { PageService } from 'src/app/services/page-maker.service';
 
 @Component({
   selector: 'app-preview-modal',
@@ -13,7 +13,7 @@ export class PreviewModalComponent implements OnInit {
   pageData: Page
 
   modalRef!: BsModalRef;
-  constructor(private modalService: BsModalService, private courseMakerService: CourseMakerService) {
+  constructor(private modalService: BsModalService, private pageService: PageService) {
     this.pageData = {} as Page
   }
 
@@ -22,7 +22,7 @@ export class PreviewModalComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.courseMakerService.currentPageData.subscribe(pg => this.pageData = pg);
+    this.pageService.currentPageData.subscribe(pg => this.pageData = pg);
   }
 
 }

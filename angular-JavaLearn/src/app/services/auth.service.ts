@@ -19,9 +19,7 @@ export class AuthService {
   public currentUser: Observable<User>
   private currentUserSubject: BehaviorSubject<User>
   
-  constructor(
-    private router: Router,
-    private httpClient: HttpClient) { 
+  constructor(private router: Router, private httpClient: HttpClient) { 
 
       let storageUser
       const storageUserAsStr = localStorage.getItem('currentUser')

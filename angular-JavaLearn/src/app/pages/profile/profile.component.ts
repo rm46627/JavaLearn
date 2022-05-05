@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { Notify } from 'notiflix/build/notiflix-notify-aio';
-import { ModalComponent } from 'src/app/components/modal/modal.component';
+import { DeleteAccountModalComponent } from 'src/app/components/delete-account-modal/delete-account-modal.component';
 import { Role } from 'src/app/models/role.enum';
 import { User } from 'src/app/models/user';
 import { AdminService } from 'src/app/services/admin.service';
@@ -42,7 +42,6 @@ export class ProfileComponent implements OnInit{
   }
 
   delete(){
-    Notify.success('User deleted.')
     this.adminService.deleteUser(this.user.id)
     this.router.navigate(["admin/users"])
   }

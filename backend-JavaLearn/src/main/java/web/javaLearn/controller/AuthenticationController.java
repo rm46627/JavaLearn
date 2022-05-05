@@ -29,7 +29,7 @@ public class AuthenticationController {
     }
 
     @PostMapping("/account-verification/{token}")
-    public ResponseEntity<String> verifyAccount(@PathVariable String token) throws Exception {
+    public ResponseEntity<String> verifyAccount(@PathVariable String token) {
         if(authService.verifyAccount(token)) {
             return new ResponseEntity<>("Account activated successfully", HttpStatus.OK);
         } else {
@@ -38,8 +38,7 @@ public class AuthenticationController {
     }
 
     @PostMapping("/login")// api/auth/login
-    public ResponseEntity<?> signIn(@RequestBody LoginRequest loginRequest)
-    {
+    public ResponseEntity<?> signIn(@RequestBody LoginRequest loginRequest) {
         return new ResponseEntity<>(authService.login(loginRequest), HttpStatus.OK);
     }
 

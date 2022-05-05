@@ -16,20 +16,23 @@ import { HomeComponent } from './pages/home/home.component';
 import { LoginComponent } from './pages/auth/login/login.component';
 import { SignupComponent } from './pages/auth/signup/signup.component';
 import { ProfileComponent } from './pages/profile/profile.component';
-import { ModalComponent } from './components/modal/modal.component';
+import { DeleteAccountModalComponent } from './components/delete-account-modal/delete-account-modal.component';
 import { CourseMakerComponent } from './pages/admin/courseMaker/courseMaker.component';
 import { AuthInterceptorProviders } from './interceptors/auth.interceptor';
+import {PreviewModalComponent} from './components/preview-modal/preview-modal.component';
+import { PageMakerComponent } from './pages/admin/courseMaker/page-maker/page-maker.component';
+import { CodingPageComponent } from './pages/admin/courseMaker/page-maker/coding-page/coding-page.component';
+import { QuizPageComponent } from './pages/admin/courseMaker/page-maker/quiz-page/quiz-page.component';
+import { TextPageComponent } from './pages/admin/courseMaker/page-maker/text-page/text-page.component';
+import { MakeCourseModalComponent } from './components/make-course-modal/make-course-modal.component';
 
 import {MatInputModule} from '@angular/material/input';
 import {MatButtonToggleModule} from '@angular/material/button-toggle';
 import {MatIconModule} from '@angular/material/icon';
 import {MatSelectModule} from '@angular/material/select';
 import {MatButtonModule} from '@angular/material/button';
-import {PreviewModalComponent} from './components/preview-modal/preview-modal.component';
-import { PageMakerComponent } from './pages/admin/courseMaker/page-maker/page-maker.component';
-import { CodingPageComponent } from './pages/admin/courseMaker/page-maker/coding-page/coding-page.component';
-import { QuizPageComponent } from './pages/admin/courseMaker/page-maker/quiz-page/quiz-page.component';
-import { TextPageComponent } from './pages/admin/courseMaker/page-maker/text-page/text-page.component';
+import {MatCardModule} from '@angular/material/card';
+import {MatDividerModule} from '@angular/material/divider';
 
 @NgModule({
   declarations: [
@@ -41,10 +44,11 @@ import { TextPageComponent } from './pages/admin/courseMaker/page-maker/text-pag
     AdminMenuComponent,
     UsersComponent,
     ProfileComponent,
-    ModalComponent,
+    DeleteAccountModalComponent,
     CourseMakerComponent,
-    PreviewModalComponent,
+    MakeCourseModalComponent,
     PageMakerComponent,
+    PreviewModalComponent,
     TextPageComponent,
     QuizPageComponent,
     CodingPageComponent
@@ -63,7 +67,9 @@ import { TextPageComponent } from './pages/admin/courseMaker/page-maker/text-pag
     MatInputModule,
     MatIconModule,
     MatSelectModule,
-    MatButtonModule
+    MatButtonModule,
+    MatCardModule,
+    MatDividerModule
   ],
   providers: [BsDropdownConfig, BsModalService, AuthInterceptorProviders],
   bootstrap: [AppComponent]

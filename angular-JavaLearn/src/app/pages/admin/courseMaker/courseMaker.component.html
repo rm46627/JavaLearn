@@ -1,0 +1,30 @@
+<div class="container">
+    <div class="pt-5">
+      <div class="card">
+        <div class="card-header">
+            <button mat-raised-button routerLink="/admin/maker/page">View page maker</button>
+            <app-make-course-modal></app-make-course-modal>
+        </div>
+        <div class="card-body">
+          <div *ngFor="let course of courseList; index as i">
+            <mat-card class="course-card">
+              <mat-card-subtitle>Course</mat-card-subtitle>
+              <mat-card-title>{{course.title}}</mat-card-title>
+              <mat-card-content>
+                <p>Course id: {{ course.id }}</p>
+                <p>{{ course.description }}</p>
+              </mat-card-content>
+              <mat-divider inset></mat-divider>
+              <mat-card-actions>
+                <button mat-button>EDIT</button>
+                <button mat-button (click)="delete(course.id)" >DELETE</button>
+              </mat-card-actions>
+              <mat-card-footer>
+                
+              </mat-card-footer>
+            </mat-card>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>

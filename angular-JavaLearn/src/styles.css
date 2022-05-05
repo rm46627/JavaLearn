@@ -3,9 +3,13 @@
     margin-top: 10px;
 }
 
-/* input.ng-invalid.ng-touched {
+
+.auth > input.ng-invalid.ng-touched {
     border: 1px solid red;
-} */
+}
+.auth > textarea.ng-invalid.ng-touched {
+    border: 1px solid red;
+}
 
 h4 {
     margin-top: 20px;
@@ -29,5 +33,25 @@ h4 {
 .clickable {
     cursor: pointer;
 }
+
 html, body { height: 100%; }
+
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+.course-maker-header {
+    display: flex;
+    flex-direction: column;
+}
+
+.topMargin {
+    margin-top: 20px;
+}
+
+.addMargin {
+    margin-left: 25px;
+    margin-right: 25px;
+}
+
+.answers > * {
+    margin-right: 10px;
+}

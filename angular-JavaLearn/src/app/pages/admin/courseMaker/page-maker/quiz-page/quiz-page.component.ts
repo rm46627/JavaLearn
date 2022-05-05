@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Page } from 'src/app/models/page/Page';
-import { CourseMakerService } from 'src/app/services/course-maker.service';
+import { Page } from 'src/app/models/course/Page';
+import { PageService } from 'src/app/services/page-maker.service';
 import { UtilsService } from 'src/app/services/utils.service';
 
 @Component({
@@ -15,7 +15,7 @@ export class QuizPageComponent implements OnInit {
 
   quizForm: any
 
-  constructor(private fb: FormBuilder, private courseMakerService: CourseMakerService, private utils: UtilsService) {
+  constructor(private fb: FormBuilder, private pageService: PageService, private utils: UtilsService) {
     this.pageData = {} as Page
   }
 
@@ -65,7 +65,7 @@ export class QuizPageComponent implements OnInit {
 
   savePage(){
     this.saveFormsAsPageData()
-    this.courseMakerService.updatePageData(this.pageData)
+    this.pageService.updatePageData(this.pageData)
   }
 
   handleKeydown(event:any) {

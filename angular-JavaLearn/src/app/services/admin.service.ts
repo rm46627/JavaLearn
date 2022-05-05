@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Notify } from 'notiflix';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { LoginRequest } from '../models/login-request';
@@ -26,6 +27,9 @@ export class AdminService extends RequestBaseService{
     .subscribe({
         error: error => {
             console.error('There was an error!', error);
+        },
+        complete: () => {
+          Notify.success('User deleted.')
         }
     });
   }

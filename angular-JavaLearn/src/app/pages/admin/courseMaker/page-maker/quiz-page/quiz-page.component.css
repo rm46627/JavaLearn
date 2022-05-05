@@ -1,0 +1,11 @@
+button {
+    max-width:10em;
+    white-space:nowrap;
+    overflow:hidden;
+    margin-right: 10px;
+}
+
+.delete-btn {
+    position:relative; 
+    top: 10px;
+}

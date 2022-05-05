@@ -1,6 +1,6 @@
 <form [formGroup]="quizForm" (ngSubmit)="savePage()">
   
-    <div class="courseMakerHeader addMargin" formGroupName="quizDetails">
+    <div class="course-maker-header addMargin" formGroupName="quizDetails">
       <mat-form-field appearance="standard">
         <mat-label>Quiz title</mat-label>
         <input matInput formControlName="quizTitle" (focusout)="savePage()">

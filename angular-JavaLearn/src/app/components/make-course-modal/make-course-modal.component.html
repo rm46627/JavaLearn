@@ -1,0 +1,28 @@
+<button mat-raised-button (click)="openModal(template)">Create course</button>
+
+<ng-template #template>
+   <div class="modal-header">
+      <h4 class="modal-title pull-left">Enter course details</h4>
+   </div>
+   <div class="modal-body">
+      <form [formGroup]="createModalForm" (ngSubmit)="create()">
+         <div class="course-maker-header addMargin auth">
+         <mat-form-field appearance="standard">
+         <mat-label>Course title</mat-label>
+         <input matInput formControlName="title">
+         </mat-form-field>
+         <label for="description">Description:</label>
+         <small *ngIf="!createModalForm.get('description')?.valid && createModalForm.get('description')?.touched">
+            Required.<br>
+          </small>
+         <textarea class="form-control" formControlName="description" rows="7" (keydown)="handleKeydown($event)"></textarea>
+         </div>
+         <div type="submit" class="text-center topMargin">
+            <button mat-raised-button [disabled]="createModalForm.invalid">Submit</button>
+         </div>
+      </form>
+   </div>
+   <div class="modal-footer">
+      <button type="button" class="btn btn-default" (click)="modalRef.hide()">Close</button>
+   </div>
+</ng-template>

@@ -8,11 +8,10 @@ import { AuthService } from 'src/app/services/auth.service';
 import { UserService } from 'src/app/services/user.service';
 
 @Component({
-   selector: 'app-modal',
-   templateUrl: './modal.component.html',
-   styleUrls: ['./modal.component.css']
+   selector: 'app-delete-account-modal',
+   templateUrl: './delete-account-modal.component.html'
 })
-export class ModalComponent implements OnInit {
+export class DeleteAccountModalComponent implements OnInit {
 
   loginForm: FormGroup
   loginRequest: LoginRequest
@@ -38,15 +37,7 @@ export class ModalComponent implements OnInit {
     this.loginRequest.username = this.loginForm.get('username')?.value
     this.loginRequest.password = this.loginForm.get('password')?.value
 
-    this.userService.deleteUser(this.loginRequest).subscribe({
-      error: (e) => {
-        console.error(e)
-        Notify.warning('Something went wrong')},
-      complete: () => {
-        Notify.success('You are successfully deleted your account.') 
-        // this.router.navigate(['/'])}
-      }
-    })
+    this.userService.deleteUser(this.loginRequest)
     this.modalRef.hide()
     this.authService.logout()
     this.router.navigate(["home"])

@@ -12,10 +12,10 @@
                 <p><strong>Enabled: </strong>{{user?.enabled}}</p>
                 <p><strong>Role: </strong>{{user?.role}}</p>
                 <div *ngIf="isAdmin()">
-                    <button class="btn btn-warning" (click)="delete()">Delete account</button>
+                    <button mat-raised-button color="warn" (click)="delete()">Delete account</button>
                 </div>
                 <div *ngIf="!isAdmin()">
-                    <app-modal></app-modal>
+                    <app-delete-account-modal></app-delete-account-modal>
                 </div>
             </div>
         </div>

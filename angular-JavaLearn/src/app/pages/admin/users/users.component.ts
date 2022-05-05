@@ -1,6 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { map, Observable } from 'rxjs';
 import { User } from '../../../models/user';
 import { AdminService } from 'src/app/services/admin.service';
 import { Router } from '@angular/router';

@@ -1,8 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { FormArray, FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
-import { Page } from 'src/app/models/page/Page';
-
-import { CourseMakerService } from 'src/app/services/course-maker.service';
+import { Course } from 'src/app/models/course/Course';
+import { CourseService } from 'src/app/services/course.service';
 
 @Component({
   selector: 'app-courseMaker',
@@ -11,9 +9,18 @@ import { CourseMakerService } from 'src/app/services/course-maker.service';
 })
 export class CourseMakerComponent implements OnInit {
 
+  courseList: Array<Course> = []
   
-  constructor(private fb: FormBuilder, private courseMakerService: CourseMakerService) {}  
+  constructor(private courseService: CourseService) {}  
   
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.courseService.findAllCourses().subscribe( data => {
+      this.courseList = data
+    })
+  }
+
+  delete(id: bigint) {
+    this.courseService.deleteCourse(id)
+  }
 
 }

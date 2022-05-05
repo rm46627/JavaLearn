@@ -1,29 +1,17 @@
-.courseMakerHeader {
-    display: flex;
-    flex-direction: column;
-}
-button {
-    max-width:10em;
-    white-space:nowrap;
-    overflow:hidden;
-    margin-right: 10px;
-}
-
-.mat-raised-button {
-    margin-top: 20px;
-}
-
-.addMargin {
-    margin-left: 25px;
-    margin-right: 25px;
-}
-
-.answers > * {
-    margin-right: 10px;
-}
-
 .card-header {
     display:flex;
     align-items: center;
     justify-content: space-evenly;
 }
+
+.card-body {
+    display:flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px 20px;
+}
+
+.course-card {
+    min-width: 400px;
+}
+  

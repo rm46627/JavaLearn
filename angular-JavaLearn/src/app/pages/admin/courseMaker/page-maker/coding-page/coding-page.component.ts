@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, Validators } from '@angular/forms';
-import { Page } from 'src/app/models/page/Page';
-import { CourseMakerService } from 'src/app/services/course-maker.service';
+import { Page } from 'src/app/models/course/Page';
+import { PageService } from 'src/app/services/page-maker.service';
 import { UtilsService } from 'src/app/services/utils.service';
 
 @Component({
@@ -13,7 +13,7 @@ export class CodingPageComponent implements OnInit {
 
   pageData : Page
 
-  constructor(private fb: FormBuilder, private courseMakerService: CourseMakerService, private utils: UtilsService) {
+  constructor(private fb: FormBuilder, private pageService: PageService, private utils: UtilsService) {
     this.pageData = {} as Page
   }
 
@@ -49,7 +49,7 @@ export class CodingPageComponent implements OnInit {
 
   savePage(){
     this.saveFormsAsPageData()
-    this.courseMakerService.updatePageData(this.pageData)
+    this.pageService.updatePageData(this.pageData)
   }
 
     // handling tab button in text areas as "\t"

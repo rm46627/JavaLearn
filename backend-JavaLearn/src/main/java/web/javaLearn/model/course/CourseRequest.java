@@ -1,13 +1,13 @@
 package web.javaLearn.model.course;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
-
-import java.util.List;
+import lombok.NoArgsConstructor;
 
 @Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class CourseRequest {
-
-    private String courseName;
-    private String courseDescription;
-    List<Page> pageList;
+    private String title;
+    private String description;
 }
