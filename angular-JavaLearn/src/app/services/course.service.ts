@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { Notify } from 'notiflix';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
-import { Course } from '../models/course/Course';
+import { CourseRequest } from '../models/course/CourseRequest';
 import { AuthService } from './auth.service';
 import { RequestBaseService } from './request-base.service';
 
@@ -22,14 +22,26 @@ export class CourseService extends RequestBaseService{
     return this.httpClient.get(API_URL + '/all', {headers: this.getHeaders})
   }
 
-  saveCourse(course: Course) {
-    return this.httpClient.post(ADMIN_API_URL + '/save', course, {headers: this.getHeaders, responseType: 'text'})
+  saveCourse(courseRequest: CourseRequest) {
+    return this.httpClient.post(ADMIN_API_URL + '/save', courseRequest, {headers: this.getHeaders, responseType: 'text'})
     .subscribe({
         error: error => {
             console.error('There was an error!', error);
         },
         complete: () => {
           Notify.success('You are successfully created course.') 
+        }
+    });
+  }
+
+  updateCourse(courseRequest: CourseRequest, courseId : bigint) {
+    return this.httpClient.put(ADMIN_API_URL + '/update/' + courseId, courseRequest, {headers: this.getHeaders, responseType: 'text'})
+    .subscribe({
+        error: error => {
+            console.error('There was an error!', error);
+        },
+        complete: () => {
+          Notify.success('You are successfully updated course.') 
         }
     });
   }

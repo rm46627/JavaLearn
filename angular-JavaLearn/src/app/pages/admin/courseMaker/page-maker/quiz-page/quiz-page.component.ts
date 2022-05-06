@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Page } from 'src/app/models/course/Page';
-import { PageService } from 'src/app/services/page-maker.service';
+import { PageService } from 'src/app/services/page.service';
 import { UtilsService } from 'src/app/services/utils.service';
 
 @Component({

@@ -1,11 +1,12 @@
 import { Injectable } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
 })
 export class UtilsService {
 
-  constructor() { }
+  constructor(private router: Router) { }
 
   // handling tab button in text areas as "\t"
   handleKeydown(event:any) {
@@ -16,5 +17,11 @@ export class UtilsService {
         event.target.value = event.target.value.substring(0, start) + '\t' + event.target.value.substring(end);
         event.target.selectionStart = event.target.selectionEnd = start + 1;
     }
+  }
+
+  reloadComponent(path: String){
+    this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
+      this.router.navigate([path]);
+    }); 
   }
 }

@@ -3,7 +3,6 @@ package web.javaLearn.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import web.javaLearn.model.auth.User;
 import web.javaLearn.model.course.Course;
 import web.javaLearn.model.course.CourseRequest;
 import web.javaLearn.repository.CourseRepository;
@@ -27,10 +26,14 @@ public class CourseService {
         return c;
     }
 
-//    public void updateCourse(Course course) {
-//        courseRepository.save(course);
-//        return course;
-//    }
+    @Transactional
+    public Course updateCourse(Long id, CourseRequest courseRequest) {
+        Course c = courseRepository.findById(id).orElseThrow();
+        c.setTitle(courseRequest.getTitle());
+        c.setDescription(courseRequest.getDescription());
+        courseRepository.save(c);
+        return c;
+    }
 
     @Transactional
     public boolean removeCourse(Long id) {

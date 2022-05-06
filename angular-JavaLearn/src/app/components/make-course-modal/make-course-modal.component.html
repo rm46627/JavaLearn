@@ -1,4 +1,7 @@
-<button mat-raised-button (click)="openModal(template)">Create course</button>
+<div *ngIf="this.updateCourse; else elseBlock">
+   <button mat-button (click)="openModal(template)">UPDATE</button></div>
+<ng-template #elseBlock>
+   <button mat-raised-button (click)="openModal(template)">Create course</button></ng-template>
 
 <ng-template #template>
    <div class="modal-header">

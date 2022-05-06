@@ -1,7 +1,7 @@
-import { Component, OnInit, TemplateRef } from '@angular/core';
+import { Component, Input, OnInit, TemplateRef } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
-import { Course } from 'src/app/models/course/Course';
+import { CourseRequest } from 'src/app/models/course/CourseRequest';
 import { CourseService } from 'src/app/services/course.service';
 import { UtilsService } from 'src/app/services/utils.service';
 
@@ -13,7 +13,14 @@ import { UtilsService } from 'src/app/services/utils.service';
 export class MakeCourseModalComponent implements OnInit {
 
   createModalForm: FormGroup
-  course: Course
+  courseRequest: CourseRequest
+
+  @Input()
+  updateCourse: bigint = BigInt(0)
+  @Input()
+  title = ""
+  @Input()
+  description = ""
 
   modalRef!: BsModalRef;
   constructor(private modalService: BsModalService, private courseService: CourseService, private utilsService: UtilsService) {
@@ -22,11 +29,14 @@ export class MakeCourseModalComponent implements OnInit {
       description: new FormControl('', Validators.required)
     });
 
-    this.course = {
-      id: BigInt(0),
+    this.courseRequest = {
       title: '',
       description: ''
     };
+  }
+  ngOnInit(): void {
+    this.createModalForm.controls['title'].setValue(this.title);
+    this.createModalForm.get('description')?.setValue(this.description);
   }
 
   openModal(template: TemplateRef<any>) {
@@ -34,11 +44,15 @@ export class MakeCourseModalComponent implements OnInit {
   }
 
   create(){
-    this.course.title = this.createModalForm.get('title')?.value
-    this.course.description = this.createModalForm.get('description')?.value
-
-    this.courseService.saveCourse(this.course)
+    this.courseRequest.title = this.createModalForm.get('title')?.value
+    this.courseRequest.description = this.createModalForm.get('description')?.value
+    if(this.updateCourse){
+      this.courseService.updateCourse(this.courseRequest, this.updateCourse)
+    } else {
+      this.courseService.saveCourse(this.courseRequest)
+    }
     this.modalRef.hide()
+    this.utilsService.reloadComponent('/admin/maker')
   }
 
   // handling tab button in text areas as "\t"
@@ -46,5 +60,4 @@ export class MakeCourseModalComponent implements OnInit {
     this.utilsService.handleKeydown(event)
   }
 
-  ngOnInit(): void {}
 }

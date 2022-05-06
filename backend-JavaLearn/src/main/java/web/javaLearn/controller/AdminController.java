@@ -48,36 +48,4 @@ public class AdminController {
         return new ResponseEntity<>(id, HttpStatus.OK);
     }
 
-    ////
-    // Courses
-    ////
-
-    @PostMapping("/courses/save")
-    public ResponseEntity<String> saveCourse(@RequestBody CourseRequest courseRequest){
-        if(courseRepository.findByTitle(courseRequest.getTitle()).isPresent()){
-            return new ResponseEntity<>("Course name taken", HttpStatus.CONFLICT);
-        }
-        courseService.saveCourse(courseRequest);
-        return new ResponseEntity<>("Added course successfully", HttpStatus.OK);
-    }
-
-    @DeleteMapping("/courses/remove/{course}")
-    public ResponseEntity<Long> removeCourse(@PathVariable Long id){
-        var isRemoved = courseService.removeCourse(id);
-        if (!isRemoved) {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        }
-        return new ResponseEntity<>(id, HttpStatus.OK);
-    }
-
-//    @PutMapping("/update")
-//    public ResponseEntity<String> updateCourse(@RequestBody Course course){
-//        if(courseRepository.findByName(course.getCourseName()).isPresent()){
-//            courseService.updateCourse(course);
-//            return new ResponseEntity<>("Updated course successfully", HttpStatus.OK);
-//        }
-//        courseService.saveCourse(course);
-//        return new ResponseEntity<>("Added course successfully", HttpStatus.OK);
-//    }
-
 }

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { TextPage } from 'src/app/models/course/TextPage';
-import { PageService } from 'src/app/services/page-maker.service';
+import { PageService } from 'src/app/services/page.service';
 import { UtilsService } from 'src/app/services/utils.service';
 
 @Component({
