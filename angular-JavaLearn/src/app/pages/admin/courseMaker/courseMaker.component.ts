@@ -28,4 +28,8 @@ export class CourseMakerComponent implements OnInit {
     }
   }
 
+  goToPageEditor(course: Course){
+    this.router.navigate(['/admin/maker/page'], {state: course})
+  }
+
 }

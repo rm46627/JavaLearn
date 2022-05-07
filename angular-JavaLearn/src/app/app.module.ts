@@ -25,7 +25,6 @@ import { CodingPageComponent } from './pages/admin/courseMaker/page-maker/coding
 import { QuizPageComponent } from './pages/admin/courseMaker/page-maker/quiz-page/quiz-page.component';
 import { TextPageComponent } from './pages/admin/courseMaker/page-maker/text-page/text-page.component';
 import { MakeCourseModalComponent } from './components/make-course-modal/make-course-modal.component';
-import { PageManagerComponent } from './pages/admin/courseMaker/page-manager/page-manager.component';
 
 import {MatInputModule} from '@angular/material/input';
 import {MatButtonToggleModule} from '@angular/material/button-toggle';
@@ -52,8 +51,7 @@ import {MatDividerModule} from '@angular/material/divider';
     PreviewModalComponent,
     TextPageComponent,
     QuizPageComponent,
-    CodingPageComponent,
-    PageManagerComponent
+    CodingPageComponent
   ],
   imports: [
     BrowserModule,

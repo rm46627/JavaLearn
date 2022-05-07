@@ -35,8 +35,8 @@ export class MakeCourseModalComponent implements OnInit {
     };
   }
   ngOnInit(): void {
-    this.createModalForm.controls['title'].setValue(this.title);
-    this.createModalForm.get('description')?.setValue(this.description);
+    this.createModalForm.controls['title'].setValue(this.title)
+    this.createModalForm.get('description')?.setValue(this.description)
   }
 
   openModal(template: TemplateRef<any>) {

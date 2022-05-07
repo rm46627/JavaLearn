@@ -23,9 +23,9 @@ public class PageController {
     //  Admin
     ////
 
-    @PostMapping("/admin/pages/save")
-    public ResponseEntity<String> savePage(@RequestBody PageRequest pageRequest){
-        pageService.savePage(pageRequest);
+    @PostMapping("/admin/pages/save/{courseId}")
+    public ResponseEntity<String> savePage(@PathVariable Long courseId, @RequestBody PageRequest pageRequest){
+        pageService.savePage(pageRequest, courseId);
         return new ResponseEntity<>("Added page successfully", HttpStatus.OK);
     }
 
@@ -49,8 +49,8 @@ public class PageController {
     ////
 
     @GetMapping("/pages/{id}")
-    public ResponseEntity<List<Page>> getAllPagesByCourse(@PathVariable Long courseId) {
-        return new ResponseEntity<>(pageService.getAllPagesByCourse(courseId), HttpStatus.OK);
+    public ResponseEntity<List<Page>> getAllPagesByCourse(@PathVariable Long id) {
+        return new ResponseEntity<>(pageService.getAllPagesByCourse(id), HttpStatus.OK);
     }
 
 }

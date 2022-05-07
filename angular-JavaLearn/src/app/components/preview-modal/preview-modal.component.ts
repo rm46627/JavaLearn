@@ -10,12 +10,10 @@ import { PageService } from 'src/app/services/page.service';
 })
 export class PreviewModalComponent implements OnInit {
 
-  pageData: Page
-
-  modalRef!: BsModalRef;
-  constructor(private modalService: BsModalService, private pageService: PageService) {
-    this.pageData = {} as Page
-  }
+  pageData!: Page
+  modalRef!: BsModalRef
+  
+  constructor(private modalService: BsModalService, private pageService: PageService) {}
 
   openModal(template: TemplateRef<any>) {
     this.modalRef = this.modalService.show(template, {class: 'modal-xl'})

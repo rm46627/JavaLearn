@@ -1,8 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
-import { Notify } from 'notiflix/build/notiflix-notify-aio';
-import { DeleteAccountModalComponent } from 'src/app/components/delete-account-modal/delete-account-modal.component';
-import { Role } from 'src/app/models/role.enum';
 import { User } from 'src/app/models/user';
 import { AdminService } from 'src/app/services/admin.service';
 import { AuthService } from 'src/app/services/auth.service';

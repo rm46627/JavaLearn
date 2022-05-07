@@ -10,6 +10,7 @@ import web.javaLearn.model.course.PageRequest;
 import web.javaLearn.repository.CourseRepository;
 import web.javaLearn.repository.PageRepository;
 
+import java.awt.print.Pageable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -26,13 +27,14 @@ public class PageService {
     }
 
     @Transactional
-    public Page savePage(PageRequest pageRequest) {
+    public Page savePage(PageRequest pageRequest, Long courseId) {
+        Course c = courseRepository.findById(courseId).orElseThrow();
         Page p = Page.builder()
                 .name(pageRequest.getName())
-                .pageOrder(pageRequest.getPageOrder())
+                .pageOrder(pageRepository.findFirstByCourseOrderByPageOrderDesc(courseId).getPageOrder()+1)
                 .type(pageRequest.getType())
                 .data(pageRequest.getData())
-                .course(courseRepository.getById(pageRequest.getCourseId()))
+                .course(c)
                 .build();
         pageRepository.save(p);
         return p;

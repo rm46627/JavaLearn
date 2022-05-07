@@ -41,7 +41,7 @@ export class CodingPageComponent implements OnInit {
   }
 
   saveFormsAsPageData(){
-    this.pageData.title = this.codeForm.get(['pageTitle'])?.value
+    this.pageData.name = this.codeForm.get(['pageName'])?.value
     for(let group of this.codeFields.controls){
       group.get(['text'])
     }

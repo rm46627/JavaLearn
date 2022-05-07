@@ -60,7 +60,7 @@ export class QuizPageComponent implements OnInit {
   }
 
   saveFormsAsPageData(){
-    this.pageData.title = this.quizForm.get(['pageTitle'])?.value
+    this.pageData.name = this.quizForm.get(['pageName'])?.value
   }
 
   savePage(){

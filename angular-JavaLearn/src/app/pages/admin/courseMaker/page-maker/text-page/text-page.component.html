@@ -1,12 +1,15 @@
 <div class="addMargin">
-    <form [formGroup]="textForm" (ngSubmit)="savePage()">
+    <form [formGroup]="textForm" (ngSubmit)="createPage()">
         <div class="course-maker-header">
             <mat-form-field appearance="standard">
-                <mat-label>Page title</mat-label>
-                <input matInput formControlName="pageTitle" (focusout)="savePage()">
+                <mat-label>Page name</mat-label>
+                <input matInput formControlName="pageName" (focusout)="savePage()">
             </mat-form-field>
             <label for="textPage">Text:</label>
             <textarea class="form-control" formControlName="text" rows="15" (focusout)="savePage()" (keydown)="handleKeydown($event)"></textarea>
+        </div>
+        <div class="text-center topMargin">
+            <button mat-raised-button color="primary" [disabled]="textForm.invalid">Submit</button>
         </div>
     </form>
 </div>

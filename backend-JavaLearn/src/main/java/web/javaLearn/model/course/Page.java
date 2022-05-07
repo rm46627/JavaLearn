@@ -20,5 +20,5 @@ public class Page {
     private String data;
 
     @ManyToOne(cascade = CascadeType.ALL)
-    Course course;
+    private Course course;
 }

@@ -1,8 +1,8 @@
 <button mat-raised-button (click)="openModal(template)">View preview</button>
 
 <ng-template #template>
-   <div class="modal-header" [innerHTML]="pageData.title"></div>
-   <div class="modal-body" [innerHTML]="pageData.body"></div>
+   <div class="modal-header" [innerHTML]="pageData.name"></div>
+   <div class="modal-body" [innerHTML]="pageData.data"></div>
    <div class="modal-footer">
       <button type="button" class="btn btn-default" (click)="modalRef.hide()">Close</button>
    </div>

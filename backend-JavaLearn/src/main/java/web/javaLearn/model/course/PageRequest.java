@@ -8,9 +8,8 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class PageRequest {
+    private Float order;
     private String name;
-    private Float pageOrder;
-    private PageType type;
     private String data;
-    private Long courseId;
+    private PageType type;
 }

@@ -10,7 +10,6 @@ import { Role } from './models/role.enum';
 import { ProfileComponent } from './pages/profile/profile.component';
 import { CourseMakerComponent } from './pages/admin/courseMaker/courseMaker.component';
 import { PageMakerComponent } from './pages/admin/courseMaker/page-maker/page-maker.component';
-import { PageManagerComponent } from './pages/admin/courseMaker/page-manager/page-manager.component';
 
 const routes: Routes = [
   {path: 'signup', component: SignupComponent},
@@ -31,12 +30,6 @@ const routes: Routes = [
 
   { path: 'admin/maker', 
     component: CourseMakerComponent,
-    canActivate: [AuthGuard],
-    data: {roles: [Role.ADMIN]}
-  },
-
-  { path: 'admin/maker/manager', 
-    component: PageManagerComponent,
     canActivate: [AuthGuard],
     data: {roles: [Role.ADMIN]}
   },
