@@ -4,10 +4,8 @@ import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import web.javaLearn.model.course.CourseRequest;
 import web.javaLearn.model.course.Page;
 import web.javaLearn.model.course.PageRequest;
-import web.javaLearn.repository.PageRepository;
 import web.javaLearn.service.PageService;
 
 import java.util.List;
@@ -17,7 +15,6 @@ import java.util.List;
 public class PageController {
 
     PageService pageService;
-    PageRepository pageRepository;
 
     ////
     //  Admin

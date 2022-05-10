@@ -33,7 +33,11 @@ export class PageMakerComponent implements OnInit {
   delete(id: bigint) {
     if(confirm("Are you sure to delete this page?")) {
       this.pageService.deletePage(id)
-      this.utils.reloadComponent(this.router.url)
+      this.utils.reloadComponent("/admin/maker")
     }
+  }
+
+  update(page: Page) {
+    
   }
 }

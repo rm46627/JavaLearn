@@ -11,6 +11,4 @@ import java.util.List;
 public interface PageRepository extends JpaRepository<Page, Long> {
     @Query(value = "SELECT * FROM page WHERE course_id = ?1 ORDER BY page_order", nativeQuery = true)
     List<Page> findAllPagesByCourse(Long courseId);
-
-    Page findFirstByCourseOrderByPageOrderDesc(Long courseId);
 }

@@ -15,7 +15,9 @@ export class TextPageComponent implements OnInit {
   @Input()
   courseId!: bigint
 
-  pageData: Page
+  @Input()
+  pageData!: Page
+
   pageRequest!: PageRequest
 
   textForm = this.fb.group({
@@ -23,11 +25,14 @@ export class TextPageComponent implements OnInit {
     text: ['', Validators.required]
   });
 
-  constructor(private fb: FormBuilder, private pageService: PageService, private utils: UtilsService) {
-    this.pageData = new Page()
-  }
+  constructor(private fb: FormBuilder, private pageService: PageService, private utils: UtilsService) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    if(Page != null){
+      this.textForm.controls['pageName'].setValue(this.pageData.name)
+      this.textForm.get('text')?.setValue(this.pageData.data)
+    }
+  }
 
   saveFormsAsPageData(){
     this.pageData.name = this.textForm.get(['pageName'])?.value
@@ -36,19 +41,20 @@ export class TextPageComponent implements OnInit {
     this.pageData.type = "TEXT"
   }
 
-  savePage(){
+  saveForPreview(){
     this.saveFormsAsPageData()
     this.pageService.updatePageData(this.pageData)
   }
 
   createPage(){
     this.pageRequest = {
-      order: this.pageData.order,
+      order: this.pageData.pageOrder,
       name: this.pageData.name,
       data: this.pageData.data,
       type: this.pageData.type
     };
     this.pageService.createPage(this.pageRequest, this.pageData.courseId)
+    this.utils.reloadComponent('/admin/maker/page')
   }
   
   // handling tab button in text areas as "\t"

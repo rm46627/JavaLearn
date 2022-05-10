@@ -19,9 +19,9 @@ export class UtilsService {
     }
   }
 
-  reloadComponent(path: String){
+  reloadComponent(path: String, obj?: any){
     this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
-      this.router.navigate([path]);
+      this.router.navigate([path], {state: obj});
     }); 
   }
 }

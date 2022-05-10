@@ -3,3 +3,10 @@
     align-items: center;
     justify-content: space-evenly;
 }
+
+.page-list {
+    display:flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px 20px;
+}

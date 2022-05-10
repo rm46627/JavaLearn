@@ -1,13 +1,18 @@
 package web.javaLearn.model.course;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 
 @Data
 @Entity
 @Builder
+@AllArgsConstructor
+@NoArgsConstructor
 public class Page {
 
     @Id
@@ -19,6 +24,7 @@ public class Page {
     private PageType type;
     private String data;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne()
+    @JsonBackReference
     private Course course;
 }

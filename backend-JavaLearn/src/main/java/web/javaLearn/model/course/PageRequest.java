@@ -10,6 +10,6 @@ import lombok.NoArgsConstructor;
 public class PageRequest {
     private Float order;
     private String name;
-    private String data;
     private PageType type;
+    private String data;
 }
